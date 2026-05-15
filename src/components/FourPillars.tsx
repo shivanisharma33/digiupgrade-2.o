@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import NeoCloudzClusterCanvas from './NeoCloudzClusterCanvas';
 
 const WorldMapVisual = () => {
   return (
     <div className="relative w-full h-full bg-black rounded-lg overflow-hidden border border-white/5 shadow-2xl flex items-center justify-center p-0">
       {/* High-Fidelity World Map Background */}
       <div className="absolute inset-0 opacity-40 mix-blend-screen">
-        <img 
-          src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2066&auto=format&fit=crop" 
+        <img
+          src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2066&auto=format&fit=crop"
           alt="World Map Texture"
           className="w-full h-full object-cover grayscale brightness-50"
         />
@@ -32,7 +33,7 @@ const WorldMapVisual = () => {
           />
           <path d="M20,20 L20,110 M40,15 L40,110 M60,15 L60,105 M80,10 L80,105 M100,20 L100,110" stroke="#f5c518" strokeWidth="0.5" strokeOpacity="0.1" fill="none" />
         </g>
-        
+
         {/* Connection Arcs */}
         <g fill="none" stroke="#f5c518" strokeWidth="1.5" strokeLinecap="round">
           <motion.path
@@ -108,17 +109,7 @@ const FourPillars = () => {
       <div className="max-w-[1400px] mx-auto">
 
         {/* Top Badge & Title */}
-        <div className="mb-20">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-[10px] font-semibold tracking-[0.5em] text-black/30 uppercase">02 /</span>
-            <div className="w-12 h-[1px] bg-black/10" />
-            <span className="text-[10px] font-semibold tracking-[0.5em] text-black/60 uppercase">OUR CAPABILITIES</span>
-          </div>
 
-          <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase mb-8 text-black relative z-10">
-            FOUR <span className="text-[#f5c518]">PILLARS</span> OF INFRASTRUCTURE
-          </h2>
-        </div>
 
         {/* 2x2 Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24">
@@ -266,27 +257,7 @@ const FourPillars = () => {
                 </li>
               ))}
             </ul>
-            <div className="aspect-[16/10] bg-[#0a0a0a] rounded-lg overflow-hidden border border-white/5 shadow-2xl p-10 flex items-center justify-center relative">
-              <div className="grid grid-cols-4 gap-4 w-full h-full">
-                {[...Array(16)].map((_, i) => (
-                  <div key={i} className="bg-[#151515] border border-white/10 rounded-md relative group overflow-hidden flex flex-col justify-end p-2">
-                    <div className="absolute top-1 right-1 flex flex-col items-end">
-                      <div className="text-[5px] font-mono text-green-500 opacity-60">B200_GPU</div>
-                      <div className="text-[5px] font-mono text-[#f5c518] opacity-40">400Gbps</div>
-                    </div>
-                    <div className="text-[6px] font-mono text-white/20 mb-1 uppercase">NODE_{i + 102}</div>
-                    <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div
-                        animate={{ width: [`${30 + Math.random() * 40}%`, `${50 + Math.random() * 40}%`, `${30 + Math.random() * 40}%`] }}
-                        transition={{ duration: 2 + Math.random() * 2, repeat: Infinity }}
-                        className="h-full bg-green-500"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0a0a0a_100%)] opacity-40 pointer-events-none" />
-            </div>
+            <NeoCloudzClusterCanvas />
           </div>
 
           {/* Pillar 4: US DATA CENTERS INC. (REVERTED TO ORIGINAL) */}

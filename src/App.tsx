@@ -1,49 +1,105 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Home from './components/Home';
-import About from './components/About';
-import Contact from './components/Contact';
-import Services from './components/Services';
-import Infrastructure from './components/Infrastructure';
-import DataCenter from './components/DataCenter';
-import NeoCloudz from './components/NeoCloudz';
-import Careers from './components/Careers';
-import SECFilings from './components/SECFilings';
-import ARMS from './components/ARMS';
-import Leadership from './components/Leadership';
-import PressRelease from './components/PressRelease';
-import InvestorRelations from './components/InvestorRelations';
-import DemiPage from './components/DemiPage';
 import { Footer } from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
-function App() {
+const Home = lazy(() => import('./components/Home'));
+const About = lazy(() => import('./components/About'));
+const Contact = lazy(() => import('./components/Contact'));
+const Services = lazy(() => import('./components/Services'));
+const Infrastructure = lazy(() => import('./components/Infrastructure'));
+const DataCenter = lazy(() => import('./components/DataCenter'));
+const NeoCloudz = lazy(() => import('./components/NeoCloudz'));
+const Careers = lazy(() => import('./components/Careers'));
+const SECFilings = lazy(() => import('./components/SECFilings'));
+const ARMS = lazy(() => import('./components/ARMS'));
+const Leadership = lazy(() => import('./components/Leadership'));
+const PressRelease = lazy(() => import('./components/PressRelease'));
+const InvestorRelations = lazy(() => import('./components/InvestorRelations'));
+const DemiPage = lazy(() => import('./components/DemiPage'));
+
+export const ROUTES = {
+  home: '/',
+  about: '/about',
+  contact: '/contact',
+  services: '/services',
+  infrastructure: '/infrastructure',
+  dataCenters: '/data-centers',
+  neocloudz: '/neocloudz',
+  careers: '/careers',
+  secFilings: '/sec-filings',
+  arms: '/arms',
+  leadership: '/leadership',
+  pressRelease: '/press-release',
+  investors: '/investors',
+  demi: '/demi',
+} as const;
+
+function RouteFallback() {
   return (
-    <Router>
-      <ScrollToTop />
-      <main className="min-h-screen">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/infrastructure" element={<Infrastructure />} />
-          <Route path="/data-centers" element={<DataCenter />} />
-          <Route path="/neocloudz" element={<NeoCloudz />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/sec-filings" element={<SECFilings />} />
-          <Route path="/arms" element={<ARMS />} />
-          <Route path="/leadership" element={<Leadership />} />
-          <Route path="/press-release" element={<PressRelease />} />
-          <Route path="/investors" element={<InvestorRelations />} />
-          <Route path="/demi" element={<DemiPage />} />
-        </Routes>
-        <Footer />
-      </main>
-    </Router>
+    <div
+      role="status"
+      aria-live="polite"
+      className="min-h-[60vh] flex items-center justify-center bg-[#060708]"
+    >
+      <div className="h-8 w-8 rounded-full border-2 border-white/10 border-t-[#ffc629] animate-spin" />
+      <span className="sr-only">Loading…</span>
+    </div>
   );
 }
 
-export default App;
+function NotFound() {
+  return (
+    <section className="min-h-[70vh] flex items-center justify-center bg-[#060708] text-white px-6">
+      <div className="max-w-xl text-center">
+        <p className="text-[11px] font-bold tracking-[0.32em] uppercase text-[#ffc629]">
+          404
+        </p>
+        <h1 className="mt-4 font-[Archivo,sans-serif] text-4xl md:text-5xl font-extrabold tracking-tight">
+          Page not found
+        </h1>
+        <p className="mt-4 text-white/55 text-sm leading-relaxed">
+          The page you’re looking for doesn’t exist or has moved.
+        </p>
+        <Link
+          to={ROUTES.home}
+          className="mt-8 inline-flex items-center gap-2 rounded-md bg-[#ffc629] px-6 py-3 text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-[#ffd84d]"
+        >
+          ← Back to home
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Navbar />
+      <main id="main-content">
+        <Suspense fallback={<RouteFallback />}>
+          <Routes>
+            <Route path={ROUTES.home} element={<Home />} />
+            <Route path={ROUTES.about} element={<About />} />
+            <Route path={ROUTES.contact} element={<Contact />} />
+            <Route path={ROUTES.services} element={<Services />} />
+            <Route path={ROUTES.infrastructure} element={<Infrastructure />} />
+            <Route path={ROUTES.dataCenters} element={<DataCenter />} />
+            <Route path={ROUTES.neocloudz} element={<NeoCloudz />} />
+            <Route path={ROUTES.careers} element={<Careers />} />
+            <Route path={ROUTES.secFilings} element={<SECFilings />} />
+            <Route path={ROUTES.arms} element={<ARMS />} />
+            <Route path={ROUTES.leadership} element={<Leadership />} />
+            <Route path={ROUTES.pressRelease} element={<PressRelease />} />
+            <Route path={ROUTES.investors} element={<InvestorRelations />} />
+            <Route path={ROUTES.demi} element={<DemiPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
+    </BrowserRouter>
+  );
+}
