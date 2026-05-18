@@ -21,13 +21,15 @@ const DocumentsCharters = lazy(() => import('./components/DocumentsCharters'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const TermsOfUse = lazy(() => import('./components/TermsOfUse'));
 const EmailAlerts = lazy(() => import('./components/EmailAlerts'));
+const MissionVision = lazy(() => import('./components/MissionVision'));
+const GlobalNetwork = lazy(() => import('./components/GlobalNetwork'));
 
 export const ROUTES = {
   home: '/',
   about: '/about',
   contact: '/contact',
   services: '/services',
-  infrastructure: '/infrastructure',
+  energy: '/energy',
   dataCenters: '/data-centers',
   neocloudz: '/neocloudz',
   careers: '/careers',
@@ -40,6 +42,8 @@ export const ROUTES = {
   privacyPolicy: '/privacy-policy',
   termsOfUse: '/terms-of-use',
   emailAlerts: '/email-alerts',
+  missionVision: '/mission-vision',
+  globalNetwork: '/global-network',
 } as const;
 
 function RouteFallback() {
@@ -91,7 +95,7 @@ export default function App() {
             <Route path={ROUTES.about} element={<About />} />
             <Route path={ROUTES.contact} element={<Contact />} />
             <Route path={ROUTES.services} element={<Services />} />
-            <Route path={ROUTES.infrastructure} element={<Infrastructure />} />
+            <Route path={ROUTES.energy} element={<Infrastructure />} />
             <Route path={ROUTES.dataCenters} element={<DataCenter />} />
             <Route path={ROUTES.neocloudz} element={<NeoCloudz />} />
             <Route path={ROUTES.careers} element={<Careers />} />
@@ -104,6 +108,8 @@ export default function App() {
             <Route path={ROUTES.privacyPolicy} element={<PrivacyPolicy />} />
             <Route path={ROUTES.termsOfUse} element={<TermsOfUse />} />
             <Route path={ROUTES.emailAlerts} element={<EmailAlerts />} />
+            <Route path={ROUTES.missionVision} element={<MissionVision />} />
+            <Route path={ROUTES.globalNetwork} element={<GlobalNetwork />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

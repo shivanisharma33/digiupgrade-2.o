@@ -52,7 +52,7 @@ const InfraHero = () => {
             DigiPowerX integrates power infrastructure, Tier III-ready data centers, and bare-metal GPU compute platforms — engineered to support the next generation of AI training, inference, and high-performance computing workloads.
           </p>
           <div className="infra-actions">
-            <a href="/infrastructure" className="infra-btn yellow">Explore Infrastructure</a>
+            <a href="/energy" className="infra-btn yellow">Explore Infrastructure</a>
             <a href="/neocloudz" className="infra-btn outline">Deploy Compute</a>
           </div>
         </div>

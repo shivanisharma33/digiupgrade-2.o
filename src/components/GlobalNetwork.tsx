@@ -1,23 +1,19 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Footer, CTASection } from './Footer';
-import { Zap, Shield, Cpu, Activity, Database, Server, ChevronRight } from 'lucide-react';
-import NeuralCube3D from './NeuralCube3D';
-import PowerFlowVisual from './PowerFlowVisual';
-import EnergyFlowDiagram from './EnergyFlowDiagram';
+import { CTASection } from './Footer';
+import DgxGlobe from './DgxGlobe';
 
-const Infrastructure = () => {
+const GlobalNetwork = () => {
   return (
     <div className="bg-[#06070a] min-h-screen text-white font-sans selection:bg-[#f5c518]/30 overflow-x-hidden">
 
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex flex-col items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
 
-        {/* Background 3D Element */}
+        {/* Background animation slot */}
         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none flex items-center justify-center">
           <div className="w-full h-full max-w-6xl">
-            <NeuralCube3D />
+            <DgxGlobe />
           </div>
         </div>
 
@@ -33,19 +29,19 @@ const Infrastructure = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-[#f5c518] shadow-[0_0_8px_#f5c518]"></span>
               <span className="text-[9px] uppercase tracking-[0.4em] font-mono text-white/60">
-                Power to Compute
+                Live Network · US Footprint
               </span>
             </div>
 
-            {/* Title */}
+            {/* Title — subtle, two-tone like /energy */}
             <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold tracking-tighter leading-[0.95] text-center mb-10 uppercase relative z-10">
-              <span className="block text-white">POWER</span>
-              <span className="block text-[#f5c518]">INFRASTRUCTURE</span>
+              <span className="block text-white">GLOBAL</span>
+              <span className="block text-[#f5c518]">NETWORK</span>
             </h1>
 
             {/* Subheading */}
             <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto mb-12 leading-relaxed font-medium tracking-wide">
-              DigiPowerX controls the full energy-to-compute value chain — integrated at every layer.
+              DigiPowerX connects owned generation, substation access, and compute capacity across a multi-site footprint — one resilient mesh from grid to GPU.
             </p>
 
             {/* Buttons */}
@@ -57,10 +53,10 @@ const Infrastructure = () => {
                 Talk to Team
               </Link>
               <Link
-                to="/about"
+                to="/energy"
                 className="px-12 py-5 border border-white/20 text-white font-semibold uppercase tracking-[0.2em] text-[11px] rounded-md bg-white/5 backdrop-blur-sm transition-all hover:bg-white/10"
               >
-                Learn More
+                Power Infrastructure
               </Link>
             </div>
           </motion.div>
@@ -73,10 +69,10 @@ const Infrastructure = () => {
             className="w-full max-w-[1200px] grid grid-cols-1 md:grid-cols-4 bg-[#0a0b0f]/80 border border-white/10 rounded-xl overflow-hidden backdrop-blur-xl shadow-2xl"
           >
             {[
-              { val: "60MW", label: "North Texarkana Plant — Existing Base" },
-              { val: "128MW", label: "Additional Capacity Generated" },
-              { val: "BTMG", label: "Behind-the-meter generation program" },
-              { val: "GRID", label: "Full redundancy & grid interconnection" }
+              { val: "4", label: "Active Sites Across the US Footprint" },
+              { val: "450MW", label: "Pipeline Capacity in Development" },
+              { val: "24/7", label: "Multi-region Network Operations" },
+              { val: "<10ms", label: "Inter-site Backbone Latency Target" }
             ].map((stat, i) => (
               <div key={i} className="p-10 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5 last:border-0 group hover:bg-white/5 transition-colors">
                 <span className="text-[#f5c518] font-mono text-3xl font-semibold mb-2 tracking-tighter">{stat.val}</span>
@@ -87,11 +83,7 @@ const Infrastructure = () => {
         </div>
       </section>
 
-
-
-
-
-      {/* Power Flow Section: From Generation to GPU Load */}
+      {/* Network Flow Section — mirrors /energy's "From Generation to GPU Load" */}
       <section className="bg-white py-15 px-6 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
 
@@ -100,7 +92,7 @@ const Infrastructure = () => {
             <div className="inline-flex items-center px-6 py-2.5 rounded-full border border-black/10 bg-black/5 backdrop-blur-sm">
               <div className="w-10 h-[1.5px] bg-[#f5c518] mr-4"></div>
               <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-black/80">
-                Power Flow
+                Network Flow
               </span>
             </div>
           </div>
@@ -108,15 +100,15 @@ const Infrastructure = () => {
           {/* Heading */}
           <div className="text-center mb-8">
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-8 relative z-10">
-              From Generation<br />
-              to <span className="text-[#f5c518]">GPU Load.</span>
+              From Region<br />
+              to <span className="text-[#f5c518]">Rack.</span>
             </h2>
           </div>
 
           {/* Subtext */}
           <div className="max-w-4xl mx-auto text-center mb-24">
             <p className="text-black/50 text-base md:text-[19px] leading-[1.6] font-medium tracking-tight">
-              The DigiPowerX infrastructure story starts before the data center. Owned generation assets, substation access, and controlled distribution paths give the company speed, cost, and optionality that no leased-power competitor can match.
+              Multi-region sites linked by a redundant backbone and operated as one platform. Power, fiber, and compute provisioned together — without the gaps that slow leased-only competitors.
             </p>
           </div>
 
@@ -126,10 +118,10 @@ const Infrastructure = () => {
             {/* Left Column: Feature Cards (2x2) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[
-                "Owned generation & grid-connected assets at multiple sites",
-                "Behind-the-meter program reduces transmission costs",
-                "Substation and distribution path shown from source to rack",
-                "Compute demand monetizes every megawatt of capacity"
+                "Geographically diverse sites with independent power profiles",
+                "Inter-site backbone for replication and failover",
+                "Edge-to-core latency budget engineered for AI workloads",
+                "One operations team across the full network footprint"
               ].map((text, i) => (
                 <div key={i} className="bg-[#f5f5f5] p-10 rounded-xl flex items-start gap-5 border border-black/[0.03] shadow-sm hover:shadow-md transition-all group">
                   <div className="mt-1 flex-shrink-0">
@@ -144,27 +136,28 @@ const Infrastructure = () => {
               ))}
             </div>
 
-            {/* Right Column: New Animated Visual */}
+            {/* Right Column: Network Animation */}
             <div className="relative h-full flex items-center justify-center">
-              <div className="w-full max-w-[800px]">
-                <EnergyFlowDiagram/>
+              <div className="w-full max-w-[800px] aspect-[16/10] bg-[#06070a] rounded-2xl overflow-hidden border border-black/10 shadow-xl">
+                <DgxGlobe />
               </div>
             </div>
 
           </div>
         </div>
       </section>
-      {/* Infrastructure Layers Section */}
+
+      {/* Network Layers Section — mirrors /energy's 3-column "Layers" */}
       <section className="bg-[#06070a] py-15 px-6 border-y border-white/5">
         <div className="max-w-[1400px] mx-auto">
 
           {/* Top Badge */}
           <div className="flex justify-center mb-10">
             <div className="inline-flex items-center px-6 py-2 rounded-full border border-white/10 bg-white/5">
-              <span className="text-[10px] font-mono text-white/40 uppercase tracking-[0.4em] mr-4">01 /</span>
+              <span className="text-[10px] font-mono text-white/40 uppercase tracking-[0.4em] mr-4">02 /</span>
               <div className="w-12 h-[1px] bg-[#f5c518] mr-4"></div>
               <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-white/80">
-                Infrastructure Layers
+                Network Layers
               </span>
             </div>
           </div>
@@ -172,34 +165,34 @@ const Infrastructure = () => {
           {/* Heading */}
           <div className="text-center mb-8">
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white mb-8 relative z-10">
-              The Value is Built Before<br />
-              the <span className="text-[#f5c518]">Server Rack..</span>
+              One Platform.<br />
+              Many <span className="text-[#f5c518]">Regions.</span>
             </h2>
           </div>
 
           {/* Subtext */}
           <div className="max-w-4xl mx-auto text-center mb-20">
             <p className="text-white/40 text-sm md:text-lg leading-relaxed font-medium">
-              In AI infrastructure, power availability is a strategic bottleneck. DigiPowerX's vertically integrated model connects generation assets through substation control to compute-ready data center capacity — compressing deployment timelines and operating costs.
+              Each site is engineered as a self-sufficient power-and-compute node, then federated into a single operating fabric — so customers get geographic diversity without operational fragmentation.
             </p>
           </div>
 
           {/* 3-Column Layers Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10 rounded-2xl overflow-hidden bg-white/[0.02]">
 
-            {/* Column 1: Generation */}
+            {/* Column 1: Sites */}
             <div className="p-10 md:p-14 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors group">
-              <div className="text-[#f5c518] text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">Generation</div>
-              <h3 className="text-white text-xl md:text-2xl font-semibold uppercase mb-6 tracking-tight">Energy Asset Base</h3>
+              <div className="text-[#f5c518] text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">Sites</div>
+              <h3 className="text-white text-xl md:text-2xl font-semibold uppercase mb-6 tracking-tight">Footprint Nodes</h3>
               <p className="text-white/40 text-sm leading-relaxed mb-10 font-medium">
-                Owned generation eliminates generation bottlenecks in the roadmap for compute-ready data center capacity.
+                Owned and operated sites in NY, AL, and NC anchor the footprint — each selected for power availability and customer proximity.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Strategic site selection near power sources",
-                  "Redundant local power infrastructure",
-                  "Energy security via utility partnership",
-                  "Scale effectively through modular deployment"
+                  "North Tonawanda, NY — gas generation node",
+                  "Buffalo, NY — urban interconnect",
+                  "Columbiana, AL — campus expansion",
+                  "Hildebran, NC — mega-site pipeline"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 group/item">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0 transform group-hover/item:translate-x-1 transition-transform">
@@ -211,19 +204,19 @@ const Infrastructure = () => {
               </ul>
             </div>
 
-            {/* Column 2: Substation */}
+            {/* Column 2: Backbone */}
             <div className="p-10 md:p-14 border-b md:border-b-0 md:border-r border-white/10 hover:bg-white/[0.02] transition-colors group">
-              <div className="text-[#f5c518] text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">Substation</div>
-              <h3 className="text-white text-xl md:text-2xl font-semibold uppercase mb-6 tracking-tight">Electrical Control Point</h3>
+              <div className="text-[#f5c518] text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">Backbone</div>
+              <h3 className="text-white text-xl md:text-2xl font-semibold uppercase mb-6 tracking-tight">Inter-site Fabric</h3>
               <p className="text-white/40 text-sm leading-relaxed mb-10 font-medium">
-                Substation control eliminates technical bottlenecks in data center development — scaling faster than competitors.
+                A managed backbone links every node — enabling replication, failover, and consistent operating posture across regions.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Fast-track utility grid access & interconnection",
-                  "Low-latency power transmission systems",
-                  "Resiliency via multi-redundant power",
-                  "Expanded electrical capacity for growth"
+                  "Diverse-path fiber between regions",
+                  "Latency-budgeted routes for AI training",
+                  "Replication of customer datasets across sites",
+                  "Failover paths for power and connectivity"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 group/item">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0 transform group-hover/item:translate-x-1 transition-transform">
@@ -235,19 +228,19 @@ const Infrastructure = () => {
               </ul>
             </div>
 
-            {/* Column 3: Compute */}
+            {/* Column 3: Operations */}
             <div className="p-10 md:p-14 hover:bg-white/[0.02] transition-colors group">
-              <div className="text-[#f5c518] text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">Compute</div>
-              <h3 className="text-white text-xl md:text-2xl font-semibold uppercase mb-6 tracking-tight">Demand Layer</h3>
+              <div className="text-[#f5c518] text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">Operations</div>
+              <h3 className="text-white text-xl md:text-2xl font-semibold uppercase mb-6 tracking-tight">Single Control Plane</h3>
               <p className="text-white/40 text-sm leading-relaxed mb-10 font-medium">
-                The compute layer converts site capacity into high-value inference, HPC, and AI workloads — the highest margin use of a megawatt.
+                Network, power, and compute are observed and controlled as one — customers get a single contract and a single point of accountability.
               </p>
               <ul className="space-y-4">
                 {[
-                  "Optimized power distribution architecture",
-                  "Dense server architecture (GPU, CPU systems)",
-                  "Efficiency metrics tailored for compute capacity",
-                  "Low-Latency high speed data center layer"
+                  "24/7 multi-region NOC coverage",
+                  "Unified telemetry across power and compute",
+                  "Capacity provisioning across the footprint",
+                  "Customer-facing SLAs at the network tier"
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 group/item">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0 transform group-hover/item:translate-x-1 transition-transform">
@@ -262,7 +255,8 @@ const Infrastructure = () => {
           </div>
         </div>
       </section>
-      {/* Value Chain Section: Pipeline Overview */}
+
+      {/* Network Pipeline Section — mirrors /energy's 4-card value chain */}
       <section className="bg-white py-15 px-6">
         <div className="max-w-[1400px] mx-auto">
 
@@ -270,7 +264,7 @@ const Infrastructure = () => {
           <div className="flex justify-center mb-10">
             <div className="inline-flex items-center px-6 py-2 rounded-full border border-black/10 bg-black/5">
               <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-black/60">
-                Power-to-Compute Pipeline
+                Network Pipeline
               </span>
             </div>
           </div>
@@ -278,28 +272,28 @@ const Infrastructure = () => {
           {/* Heading */}
           <div className="text-center mb-10">
             <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-8 relative z-10">
-              The Value Chain Starts<br />
-              Before the <span className="text-[#f5c518]">Data Center.</span>
+              Reach is Built<br />
+              Region by <span className="text-[#f5c518]">Region.</span>
             </h2>
           </div>
 
           {/* Subtext */}
           <div className="max-w-4xl mx-auto text-center mb-20 space-y-6">
             <p className="text-black/50 text-sm md:text-lg leading-relaxed font-medium">
-              DigiPowerX operates across the full energy-to-compute value chain: power generation, substation access, data center deployment, and GPU infrastructure — integrated at every layer for speed, cost advantage, and long-term scalability.
+              The DigiPowerX network compounds as each new site comes online: more diversity, more capacity, lower customer latency, and more revenue per megawatt across the footprint.
             </p>
             <p className="text-black/50 text-sm md:text-lg leading-relaxed font-medium">
-              Owning the infrastructure from generation through compute enables capabilities that co-location-only or lease-only models cannot replicate.
+              Federated by design — every node is operationally independent and operationally consistent.
             </p>
           </div>
 
           {/* 4-Column Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             {[
-              { title: "Generation", desc: "Vertically-integrated energy assets support flexible models — power sales, mining, collocation, and AI compute." },
-              { title: "Substation", desc: "Controlled (not leased) and electrical interconnection remains the primary development bottleneck for competitors." },
-              { title: "Facility", desc: "Data center conversion turns energy access into compute-ready capacity at the highest revenue-per-megawatt tier." },
-              { title: "Compute", desc: "AI, HPC, collocation, and mining demand monetizes every layer of the infrastructure stack." }
+              { title: "Discover", desc: "Site selection driven by power, fiber, and customer-proximity — not just real estate availability." },
+              { title: "Build",    desc: "Owned generation and substation control let each node come online without third-party blockers." },
+              { title: "Connect",  desc: "New sites join the backbone with diverse-path fiber and unified operational tooling." },
+              { title: "Operate",  desc: "One NOC, one telemetry pane, one accountable team across every region in the footprint." }
             ].map((card, i) => (
               <div key={i} className="bg-[#f2f2f2] p-10 rounded-xl flex flex-col items-center text-center group hover:bg-[#f5c518]/5 transition-colors border border-black/[0.03]">
                 <h3 className="text-black text-xl font-semibold uppercase mb-6 tracking-tight">{card.title}</h3>
@@ -315,10 +309,10 @@ const Infrastructure = () => {
         <div className="bg-[#06070a] py-16 px-6 -mx-6 md:-mx-12 lg:-mx-24 mt-12 border-y border-white/5">
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
             {[
-              { val: "~$0.04/kWh", label: "POWER PRODUCTION COST CITED FOR NORTH TEXARKANA — A STRUCTURAL ADVANTAGE OVER MARKET ELECTRICITY RATES." },
-              { val: "Grid + Site", label: "BEHIND-THE-METER GENERATING PROGRAM REDUCES TRANSMISSION COSTS AND IMPROVES ENERGY ECONOMICS." },
-              { val: "Tier III Path", label: "ON-SITE GENERATION AND GRID INTERCONNECTION PROVIDE DUAL-PATH REDUNDANCY AND REVENUE OPTIONALITY." },
-              { val: "~$0.04/kWh", label: "ALABAMA CONVERSION STRATEGY TARGETS HIGHER-VALUE DATA CENTER CLASSIFICATION FOR ENTERPRISE AND AI CUSTOMERS." }
+              { val: "4 Regions", label: "ACTIVE OPERATING REGIONS ACROSS THE US — DIVERSIFIED POWER PROFILES AND CUSTOMER PROXIMITY." },
+              { val: "Diverse Path", label: "INTER-SITE FIBER ENGINEERED WITH PHYSICAL ROUTE DIVERSITY FOR REPLICATION AND FAILOVER." },
+              { val: "Single NOC",   label: "MULTI-REGION OPERATIONS RUN FROM A UNIFIED CONTROL PLANE — ONE TEAM, ONE PANE OF GLASS." },
+              { val: "450MW Pipe",   label: "PIPELINE CAPACITY IN DEVELOPMENT EXTENDS THE NETWORK INTO NEW CUSTOMER GEOGRAPHIES." }
             ].map((stat, i) => (
               <div key={i} className="flex flex-col gap-4 border-l border-white/10 pl-8 first:border-0">
                 <span className="text-[#f5c518] text-3xl font-semibold tracking-tight">{stat.val}</span>
@@ -330,9 +324,10 @@ const Infrastructure = () => {
           </div>
         </div>
       </section>
+
       <CTASection />
     </div>
   );
 };
 
-export default Infrastructure;
+export default GlobalNetwork;

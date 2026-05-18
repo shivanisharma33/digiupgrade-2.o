@@ -41,7 +41,7 @@ const Footer = () => {
           <div>
             <h4 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30 mb-6">Services</h4>
             <ul className="space-y-4 text-[13px] font-medium text-gray-400">
-              <li><Link to="/infrastructure" className="text-[#f5c518] hover:text-white transition-colors font-semibold">Global Network (Live)</Link></li>
+              <li><Link to="/global-network" className="text-[#f5c518] hover:text-white transition-colors font-semibold">Global Network (Live)</Link></li>
               <li><a href="#" className="hover:text-white transition-colors">Power Generation</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Substation Build</a></li>
               <li><a href="#" className="hover:text-white transition-colors">DC Construction</a></li>

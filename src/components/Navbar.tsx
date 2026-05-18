@@ -30,7 +30,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Services', hasDropdown: false, path: '/services' },
     { name: 'Infrastructure', hasDropdown: true, sublinks: [
-      { name: 'Global Network', path: '/infrastructure' },
+      { name: 'Energy', path: '/energy' },
+      { name: 'Global Network', path: '/global-network' },
       { name: 'ARMS Modular Systems', path: '/arms' },
       { name: 'Data Centers', path: '/data-centers' },
     ]},
@@ -42,6 +43,7 @@ const Navbar = () => {
     ]},
     { name: 'Company', hasDropdown: true, sublinks: [
       { name: 'About Us', path: '/about' },
+      { name: 'Mission & Vision', path: '/mission-vision' },
       { name: 'Leadership', path: '/leadership' },
       { name: 'Press Release', path: '/press-release' },
       { name: 'Careers', path: '/careers' },

@@ -5,7 +5,7 @@ import Marquee from './Marquee';
 import WhatWeDo from './WhatWeDo';
 import FourPillars from './FourPillars';
 import Services from './Services';
-import StatsAndInfra from './StatsAndInfra';
+import PowerInIntelligenceOut from './PowerInIntelligenceOut';
 import NeoCloudzSection from './NeoCloudzSection';
 import Colocation from './Colocation';
 import Capabilities from './Capabilities';
@@ -21,7 +21,7 @@ const Home = () => {
       <FourPillars />
 
       <Colocation />
-      <StatsAndInfra />
+      <PowerInIntelligenceOut />
       <Capabilities />
       <NeoCloudzSection />
       <HowWeWork />

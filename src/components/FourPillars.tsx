@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import NeoCloudzClusterCanvas from './NeoCloudzClusterCanvas';
+import DigiPowerXMap from './DigiPowerXMap';
+import ModularUnitVisual from './ModularUnitVisual';
+import BuiltForAIStack from './BuiltForAIStack';
 
 const WorldMapVisual = () => {
   return (
@@ -105,55 +108,10 @@ const WorldMapVisual = () => {
 
 const FourPillars = () => {
   return (
-    <section className="bg-[#f2f4f7] py-15 md:py-15 px-6">
+    <section className="bg-black py-15 md:py-15 px-6">
       <div className="max-w-[1400px] mx-auto">
 
-        {/* Top Badge & Title */}
-        <div className="flex flex-col items-center text-center mb-16 md:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-10 relative z-10"
-          >
-            <div className="inline-flex items-center gap-3 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100 rounded-full px-6 py-2.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-shadow duration-500 cursor-default">
-              <span className="text-[9px] font-semibold tracking-[0.2em] text-black">01 /</span>
-              <div className="h-[2px] w-12 bg-[#f5c518] rounded-full" />
-              <span className="text-[9px] font-semibold tracking-[0.2em] text-black uppercase">CORE PILLARS</span>
-            </div>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.95] tracking-tighter uppercase mb-8 text-black relative z-10"
-          >
-            THE FOUR <br />
-            <span className="text-[#f5c518] relative inline-block">
-              CORE PILLARS.
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-                className="absolute -bottom-2 left-0 w-full h-[3px] bg-[#f5c518] origin-left opacity-60"
-              />
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-gray-500 text-[13px] md:text-[15px] max-w-2xl leading-relaxed mx-auto px-6 font-medium relative z-10"
-          >
-            DigiPowerX owns and operates the entire value chain — controlling power plants, high-density liquid-cooled facilities, bare-metal GPU clusters, and modular fabrication systems.
-          </motion.p>
-        </div>
+        
 
 
         {/* 2x2 Grid */}
@@ -161,9 +119,9 @@ const FourPillars = () => {
 
           {/* Pillar 1: WE OWN THE POWER */}
           <div className="flex flex-col">
-            <div className="text-[10px] font-semibold tracking-[0.3em] text-black/30 uppercase mb-8">VERTICAL INTEGRATION</div>
-            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-black mb-6">WE OWN THE POWER</h3>
-            <p className="text-black/50 text-sm leading-relaxed mb-10 max-w-lg">
+            <div className="text-[10px] font-semibold tracking-[0.3em] text-[#f5c518] uppercase mb-8">VERTICAL INTEGRATION</div>
+            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-white mb-6">WE OWN THE POWER</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-10 max-w-lg">
               DigiPowerX controls the full energy stack — from owned power plants and utility-connected sites to 450 MW of pipeline development across the U.S.
             </p>
             <ul className="space-y-4 mb-12">
@@ -173,22 +131,22 @@ const FourPillars = () => {
                 "450 MW development pipeline",
                 "Future-site acquisitions underway"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-black/60">
+                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-white/70">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#f5c518]" />
                   {item}
                 </li>
               ))}
             </ul>
             <div className="aspect-[16/10] relative">
-              <WorldMapVisual />
+              <DigiPowerXMap />
             </div>
           </div>
 
           {/* Pillar 2: DIRECT-TO-CHIP LIQUID COOLING (REVERTED TO ORIGINAL) */}
           <div className="flex flex-col">
-            <div className="text-[10px] font-semibold tracking-[0.3em] text-black/30 uppercase mb-8">DATA CENTER ARCHITECTURE</div>
-            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-black mb-6">DIRECT-TO-CHIP LIQUID COOLING</h3>
-            <p className="text-black/50 text-sm leading-relaxed mb-10 max-w-lg">
+            <div className="text-[10px] font-semibold tracking-[0.3em] text-[#f5c518] uppercase mb-8">DATA CENTER ARCHITECTURE</div>
+            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-white mb-6">DIRECT-TO-CHIP LIQUID COOLING</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-10 max-w-lg">
               Purpose-built for NVIDIA Blackwell and next-gen AI accelerators. Cold plates deliver coolant directly to the chip — no air cooling required at rack-level.
             </p>
             <ul className="space-y-4 mb-12">
@@ -198,7 +156,7 @@ const FourPillars = () => {
                 "Chiller + cooling tower rejection loop",
                 "PUE <1.15 · Zero thermal throttling"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-black/60">
+                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-white/70">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#f5c518]" />
                   {item}
                 </li>
@@ -284,9 +242,9 @@ const FourPillars = () => {
 
           {/* Pillar 3: MEET NEOCLOUDZ (REVERTED TO ORIGINAL) */}
           <div className="flex flex-col">
-            <div className="text-[10px] font-semibold tracking-[0.3em] text-black/30 uppercase mb-8">FULLY OWNED SUBSIDIARY</div>
-            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-black mb-6">MEET NEOCLOUDZ</h3>
-            <p className="text-black/50 text-sm leading-relaxed mb-10 max-w-lg">
+            <div className="text-[10px] font-semibold tracking-[0.3em] text-[#f5c518] uppercase mb-8">FULLY OWNED SUBSIDIARY</div>
+            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-white mb-6">MEET NEOCLOUDZ</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-10 max-w-lg">
               NeoCloudz is DigiPowerX's GPU compute platform — bare-metal NVIDIA Blackwell B200 clusters delivered directly from our owned data centers.
             </p>
             <ul className="space-y-4 mb-12">
@@ -296,7 +254,7 @@ const FourPillars = () => {
                 "400Gb/s InfiniBand fabric",
                 "Provisioned in <58 seconds"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-black/60">
+                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-white/70">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#f5c518]" />
                   {item}
                 </li>
@@ -307,9 +265,9 @@ const FourPillars = () => {
 
           {/* Pillar 4: US DATA CENTERS INC. (REVERTED TO ORIGINAL) */}
           <div className="flex flex-col">
-            <div className="text-[10px] font-semibold tracking-[0.3em] text-black/30 uppercase mb-8">STRATEGIC PARTNER</div>
-            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-black mb-6">US DATA CENTERS INC.</h3>
-            <p className="text-black/50 text-sm leading-relaxed mb-10 max-w-lg">
+            <div className="text-[10px] font-semibold tracking-[0.3em] text-[#f5c518] uppercase mb-8">STRATEGIC PARTNER</div>
+            <h3 className="text-3xl font-semibold uppercase tracking-tighter text-white mb-6">US DATA CENTERS INC.</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-10 max-w-lg">
               A majority shareholder in US Data Centers Inc. — a modular data center manufacturer purpose-built for rapid & scalable infrastructure deployment.
             </p>
             <ul className="space-y-4 mb-12">
@@ -319,92 +277,14 @@ const FourPillars = () => {
                 "Rapid deployment — operational in weeks",
                 "Factory-built & commissioned off-site"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-black/60">
+                <li key={i} className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-white/70">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#f5c518]" />
                   {item}
                 </li>
               ))}
             </ul>
-            <div className="aspect-[16/10] bg-[#050505] rounded-lg overflow-hidden border border-white/5 shadow-2xl relative flex items-center justify-center">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,197,24,0.15)_0%,transparent_70%)]" />
-
-              <div className="relative w-full h-full flex items-center justify-center">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-48 h-48 border border-[#f5c518]/20 rounded-full"
-                >
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#f5c518] rounded-full shadow-[0_0_15px_#f5c518]" />
-                </motion.div>
-
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute w-64 h-64 border border-[#f5c518]/10 rounded-full"
-                >
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#f5c518]/60 rounded-full" />
-                </motion.div>
-
-                <div className="relative">
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-20 h-20 bg-[#f5c518] rounded-full blur-2xl opacity-50"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-10 h-10 bg-[#f5c518] rounded-full shadow-[0_0_30px_#f5c518] border-2 border-white/20" />
-                  </div>
-                  <svg className="absolute -inset-10 w-40 h-40" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="48" stroke="#f5c518" strokeWidth="0.5" strokeDasharray="4 8" strokeOpacity="0.3" />
-                    <motion.circle
-                      cx="50" cy="50" r="48"
-                      stroke="#f5c518" strokeWidth="1"
-                      strokeDasharray="20 180"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    />
-                  </svg>
-                </div>
-
-                {[...Array(8)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{
-                      y: [-20, 20],
-                      x: [-10, 10],
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 3 + Math.random() * 2,
-                      repeat: Infinity,
-                      delay: i * 0.5
-                    }}
-                    className="absolute w-1 h-1 bg-[#f5c518] rounded-full"
-                    style={{
-                      top: `${20 + Math.random() * 60}%`,
-                      left: `${20 + Math.random() * 60}%`
-                    }}
-                  />
-                ))}
-
-                <div className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4">
-                  {[
-                    { label: 'OUTPUT', val: '1.25MW' },
-                    { label: 'EFFICIENCY', val: '98.4%' },
-                    { label: 'THERMAL', val: '24°C' }
-                  ].map((stat, i) => (
-                    <div key={i} className="text-right">
-                      <div className="text-[7px] font-mono text-white/20 uppercase tracking-widest">{stat.label}</div>
-                      <div className="text-[10px] font-mono text-[#f5c518] font-black">{stat.val}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="absolute bottom-8 left-8 border-l-2 border-[#f5c518] pl-4">
-                  <div className="text-[8px] font-mono text-white/40 uppercase tracking-widest mb-1">UNIT_DEPLOYMENT</div>
-                  <div className="text-[12px] font-black text-white uppercase tracking-tighter">USDC_MODULAR_01</div>
-                </div>
-              </div>
+            <div className="aspect-[16/10] bg-[#050505] rounded-lg overflow-hidden border border-white/5 shadow-2xl relative">
+              <BuiltForAIStack />
             </div>
           </div>
 
