@@ -142,15 +142,15 @@ const DataCenter = () => {
       {/* ========================================================= */}
       {/* COOLING ARCHITECTURE SECTION - (LEAVE AS IS: LEFT CONTENT) */}
       {/* ========================================================= */}
-      <section className="flex flex-col lg:flex-row items-stretch min-h-[600px] relative overflow-hidden bg-[#f7f7f5]">
+      <section className="flex flex-col lg:flex-row items-stretch min-h-[600px] relative overflow-hidden bg-[#050608] border-y border-white/5" style={{ backgroundColor: '#050608' }}>
         <div className="w-full lg:w-1/2 px-12 lg:px-24 py-0 flex flex-col justify-center">
           <div className="py-12 lg:py-0">
             <span className="text-[10px] font-semibold tracking-[0.4em] uppercase text-[#f5c518]">Cooling Architecture</span>
-            <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.9] tracking-tighter uppercase text-black mt-6 mb-8">
+            <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[0.9] tracking-tighter uppercase text-white mt-6 mb-8">
               HEAT OUT. <br />
               PERFORMANCE IN.
             </h2>
-            <p className="text-black/60 text-lg leading-relaxed max-w-xl mb-12 font-medium">
+            <p className="text-white/60 text-lg leading-relaxed max-w-xl mb-12 font-medium">
               A closed-loop direct liquid cooling system connects every GPU rack to CDU distribution, chiller plant, and heat rejection — eliminating thermal throttle as a constraint on AI compute density.
             </p>
             <ul className="space-y-4">
@@ -162,8 +162,8 @@ const DataCenter = () => {
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="text-[#f5c518] mt-1">→</span>
-                  <p className="text-black/70 text-sm font-semibold">
-                    {item.label && <span className="text-black mr-2">{item.label}</span>}
+                  <p className="text-white/70 text-sm font-semibold">
+                    {item.label && <span className="text-white mr-2">{item.label}</span>}
                     {item.text}
                   </p>
                 </li>

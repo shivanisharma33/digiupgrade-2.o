@@ -105,14 +105,59 @@ const WorldMapVisual = () => {
 
 const FourPillars = () => {
   return (
-    <section className="bg-[#f2f4f7] py-32 px-6">
+    <section className="bg-[#f2f4f7] py-15 md:py-15 px-6">
       <div className="max-w-[1400px] mx-auto">
 
         {/* Top Badge & Title */}
+        <div className="flex flex-col items-center text-center mb-16 md:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-10 relative z-10"
+          >
+            <div className="inline-flex items-center gap-3 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100 rounded-full px-6 py-2.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-shadow duration-500 cursor-default">
+              <span className="text-[9px] font-semibold tracking-[0.2em] text-black">01 /</span>
+              <div className="h-[2px] w-12 bg-[#f5c518] rounded-full" />
+              <span className="text-[9px] font-semibold tracking-[0.2em] text-black uppercase">CORE PILLARS</span>
+            </div>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[clamp(2.5rem,6vw,5rem)] font-semibold leading-[0.95] tracking-tighter uppercase mb-8 text-black relative z-10"
+          >
+            THE FOUR <br />
+            <span className="text-[#f5c518] relative inline-block">
+              CORE PILLARS.
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+                className="absolute -bottom-2 left-0 w-full h-[3px] bg-[#f5c518] origin-left opacity-60"
+              />
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-gray-500 text-[13px] md:text-[15px] max-w-2xl leading-relaxed mx-auto px-6 font-medium relative z-10"
+          >
+            DigiPowerX owns and operates the entire value chain — controlling power plants, high-density liquid-cooled facilities, bare-metal GPU clusters, and modular fabrication systems.
+          </motion.p>
+        </div>
 
 
         {/* 2x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 md:gap-x-16 gap-y-12 md:gap-y-16">
 
           {/* Pillar 1: WE OWN THE POWER */}
           <div className="flex flex-col">

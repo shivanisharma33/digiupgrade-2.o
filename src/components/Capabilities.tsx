@@ -9,30 +9,30 @@ const CapabilityCard = ({ icon: Icon, title, description, delay }: { icon: any, 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative bg-gradient-to-br from-white via-[#f5c518]/5 to-[#f5c518]/15 rounded-[28px] p-10 border border-[#f5c518]/10 shadow-[0_10px_50px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_70px_rgba(245,197,24,0.15)] hover:border-[#f5c518]/30 transition-all duration-700 h-full flex flex-col items-start overflow-hidden"
+      className="group relative bg-gradient-to-br from-white via-[#f5c518]/3 to-[#f5c518]/8 rounded-2xl p-7 md:p-8 border border-[#f5c518]/10 shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgba(245,197,24,0.1)] hover:border-[#f5c518]/25 transition-all duration-500 h-full flex flex-col items-start overflow-hidden"
     >
       {/* Subtle Mesh Background for texture */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#f5c518 1px, transparent 0)', backgroundSize: '24px 24px' }} />
 
       {/* Decorative corner element */}
-      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#f5c518]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-tr-[28px]" />
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#f5c518]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-tr-2xl" />
 
       {/* Icon Container with animated ring */}
-      <div className="relative mb-8">
-        <div className="absolute inset-0 bg-[#f5c518] rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500" />
-        <div className="w-16 h-16 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-50 rounded-2xl flex items-center justify-center relative z-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-          <Icon className="w-8 h-8 text-[#f5c518] group-hover:text-black transition-colors duration-500" />
+      <div className="relative mb-6">
+        <div className="absolute inset-0 bg-[#f5c518] rounded-xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-500" />
+        <div className="w-12 h-12 bg-white shadow-[0_4px_16px_rgba(0,0,0,0.04)] border border-gray-50 rounded-xl flex items-center justify-center relative z-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+          <Icon className="w-6 h-6 text-[#f5c518] group-hover:text-black transition-colors duration-500" />
         </div>
       </div>
 
-      <h3 className="text-2xl font-semibold uppercase tracking-tight text-black mb-5 group-hover:text-[#f5c518] transition-colors duration-500">{title}</h3>
-      <p className="text-gray-500 text-[15px] leading-relaxed font-medium group-hover:text-gray-600 transition-colors duration-500">
+      <h3 className="text-lg md:text-[19px] font-semibold uppercase tracking-tight text-black mb-3.5 group-hover:text-[#f5c518] transition-colors duration-500">{title}</h3>
+      <p className="text-gray-500 text-[13px] md:text-sm leading-relaxed font-medium group-hover:text-gray-600 transition-colors duration-500">
         {description}
       </p>
 
       {/* Bottom indicator line */}
-      <div className="mt-auto pt-8 w-full">
-        <div className="h-[2px] w-8 bg-gray-100 group-hover:w-full group-hover:bg-[#f5c518] transition-all duration-700 origin-left" />
+      <div className="mt-auto pt-6 w-full">
+        <div className="h-[2px] w-6 bg-gray-100 group-hover:w-full group-hover:bg-[#f5c518] transition-all duration-500 origin-left" />
       </div>
     </motion.div>
   );
@@ -73,7 +73,7 @@ const Capabilities = () => {
   ];
 
   return (
-    <section className="bg-[#fcfcfc] pt-10 pb-32 md:pb-48 relative overflow-hidden">
+    <section className="bg-[#fcfcfc] pt-10 pb-16 md:pb-20 relative overflow-hidden">
 
       {/* Enhanced Technical Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,#000_1px,transparent_0)] [background-size:48px_48px] opacity-[0.03] pointer-events-none" />
@@ -104,14 +104,14 @@ const Capabilities = () => {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
 
         {/* Header Section with enhanced typography */}
-        <div className="flex flex-col items-center text-center mb-32">
+        <div className="flex flex-col items-center text-center mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-4 bg-white shadow-sm border border-gray-100 rounded-full px-6 py-2.5 mb-12 hover:shadow-md transition-shadow duration-500"
           >
-            <span className="text-[10px] font-semibold tracking-widest text-gray-400">04 /</span>
+            <span className="text-[10px] font-semibold tracking-widest text-gray-400">03 /</span>
             <div className="h-[2px] w-12 bg-[#f5c518]" />
             <span className="text-[10px] font-semibold tracking-[0.25em] text-black uppercase">CAPABILITIES</span>
           </motion.div>
@@ -121,14 +121,19 @@ const Capabilities = () => {
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[clamp(3rem,7vw,6.5rem)] font-semibold leading-[0.85] tracking-tighter uppercase text-black mb-10"
+            className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-10"
           >
-            EVERYTHING <br className="hidden md:block" />
-            YOU NEED. <br />
+            FULL-STACK FACILITY <br className="hidden md:block" />
             <span className="text-[#f5c518] relative">
-              NOTHING
-              <div className="absolute -bottom-2 left-0 w-full h-2 bg-[#f5c518] opacity-20 blur-sm" />
-            </span> YOU DON'T.
+              SPECIFICATIONS.
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
+                className="absolute -bottom-2 left-0 w-full h-[3px] bg-[#f5c518] origin-left opacity-60"
+              />
+            </span>
           </motion.h2>
 
           <motion.p
@@ -136,14 +141,14 @@ const Capabilities = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-400 text-[16px] md:text-[19px] max-w-4xl leading-relaxed font-medium"
+            className="text-gray-500 text-[14px] md:text-[17px] max-w-4xl leading-relaxed font-medium"
           >
-            DigiPowerX facilities are purpose-built for the density and reliability demands of AI infrastructure — not retrofitted from legacy enterprise data centers.
+            From incoming high-voltage utility to GPU rack output — each layer of our owned facilities is designed with high-density AI workload performance as the primary constraint.
           </motion.p>
         </div>
 
         {/* Grid Section with more spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {items.map((item, index) => (
             <CapabilityCard
               key={index}

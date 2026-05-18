@@ -41,7 +41,7 @@ const Footer = () => {
           <div>
             <h4 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30 mb-6">Services</h4>
             <ul className="space-y-4 text-[13px] font-medium text-gray-400">
-              <li><Link to="/demi" className="text-[#f5c518] hover:text-white transition-colors font-semibold">AI Infrastructure (Live)</Link></li>
+              <li><Link to="/infrastructure" className="text-[#f5c518] hover:text-white transition-colors font-semibold">Global Network (Live)</Link></li>
               <li><a href="#" className="hover:text-white transition-colors">Power Generation</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Substation Build</a></li>
               <li><a href="#" className="hover:text-white transition-colors">DC Construction</a></li>
@@ -52,7 +52,6 @@ const Footer = () => {
           <div>
             <h4 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30 mb-6">Subsidiaries</h4>
             <ul className="space-y-4 text-[13px] font-medium text-gray-400">
-              <li><Link to="/demi" className="hover:text-white transition-colors">AI Infrastructure Model</Link></li>
               <li><a href="#" className="text-[#00e878] hover:text-[#00e878] drop-shadow-[0_0_8px_rgba(0,232,120,0.3)] transition-all">NeoCloudz ↗</a></li>
               <li><a href="#" className="hover:text-white transition-colors">DigiGrid Platform</a></li>
               <li><Link to="/data-centers" className="hover:text-white transition-colors">US Data Centers</Link></li>
@@ -63,15 +62,30 @@ const Footer = () => {
             <h4 className="text-[10px] font-semibold tracking-[0.2em] uppercase text-white/30 mb-6">Contact</h4>
             <ul className="space-y-4 text-[13px] font-medium text-gray-400">
               <li><a href="#" className="hover:text-[#f5c518] transition-colors">Talk to Sales</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Investor Relations</a></li>
+              <li><Link to="/investors" className="hover:text-white transition-colors">Investor Relations</Link></li>
+              <li><Link to="/documents-charters" className="hover:text-white transition-colors">Documents & Charters</Link></li>
+              <li><Link to="/email-alerts" className="hover:text-white transition-colors">Email Alerts</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-use" className="hover:text-white transition-colors">Terms of Use</Link></li>
+              <li><a href="#" className="hover:text-white transition-colors">Trust Center</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Media Inquiries</a></li>
             </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest">
-            © 2025 DigiPowerX, Inc. · 100% U.S. Owned & Operated
+          <div className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest flex flex-wrap items-center gap-2">
+            <span>© 2025 DigiPowerX, Inc.</span>
+            <span>·</span>
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <span>·</span>
+            <Link to="/terms-of-use" className="hover:text-white transition-colors">Terms of Use</Link>
+            <span>·</span>
+            <Link to="/email-alerts" className="hover:text-white transition-colors">Email Alerts</Link>
+            <span>·</span>
+            <a href="#" className="hover:text-white transition-colors">Trust Center</a>
+            <span>·</span>
+            <span>100% U.S. Owned & Operated</span>
           </div>
           <div className="flex items-center gap-3 text-[10px] font-semibold text-gray-400 uppercase tracking-widest">
             <span className="w-2 h-2 bg-[#00e878] rounded-full animate-pulse shadow-[0_0_8px_rgba(0,232,120,0.8)]" />

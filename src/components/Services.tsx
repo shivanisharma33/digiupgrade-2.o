@@ -106,7 +106,7 @@ export default function Services() {
     <div className="services-page font-sans bg-[#050505]">
 
       {/* ── 00 / Premium Hero Section (Inspired by Provided Image) ── */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-10">
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden pt-28">
         {/* Technical Background Grid */}
         <div className="absolute inset-0 z-0 opacity-10">
           <div
@@ -119,7 +119,7 @@ export default function Services() {
           />
         </div>
 
-        <div className="container mx-auto px-6 lg:px-20 relative z-10 flex flex-col items-center text-center pt-20">
+        <div className="container mx-auto px-6 lg:px-20 relative z-10 flex flex-col items-center text-center pt-8">
           {/* Centered Content */}
           <div className="max-w-5xl">
             <motion.h1
@@ -147,7 +147,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center gap-10 pb-24"
+              className="flex flex-wrap items-center justify-center gap-10 pb-12"
             >
               <button className="px-12 py-6 bg-[#f5c518] text-black font-semibold uppercase tracking-[0.2em] text-[12px] rounded-md hover:bg-white transition-all shadow-[0_15px_50px_rgba(245,197,24,0.3)] flex items-center gap-4 group">
                 Talk to Team <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -320,14 +320,11 @@ export default function Services() {
 
       {/* ── 02 / Advanced Tech (Dark) ── */}
       <section className="bg-[#06070a] py-32 md:py-15 relative overflow-hidden text-white border-y border-white/5">
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
-          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)', backgroundSize: '48px 48px' }} />
-        </div>
 
         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
           <SectionLabel num="02" text="Compute & Modular" dark />
 
-          <div className="grid lg:grid-cols-2 gap-32 items-center mb-64">
+          <div className="grid lg:grid-cols-2 gap-32 items-center mb-30">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}

@@ -11,7 +11,7 @@ const Infrastructure = () => {
     <div className="bg-[#06070a] min-h-screen text-white font-sans selection:bg-[#f5c518]/30 overflow-x-hidden">
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+      <section className="relative min-h-[80vh] flex flex-col items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
 
         {/* Background 3D Element */}
         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none flex items-center justify-center">
@@ -48,7 +48,7 @@ const Infrastructure = () => {
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12 md:mb-16">
               <Link
                 to="/contact"
                 className="px-12 py-5 bg-[#f5c518] text-black font-semibold uppercase tracking-[0.2em] text-[11px] rounded-md transition-all hover:brightness-110 active:scale-95 shadow-[0_10px_40px_rgba(245,197,24,0.2)]"
@@ -91,7 +91,7 @@ const Infrastructure = () => {
 
 
       {/* Power Flow Section: From Generation to GPU Load */}
-      <section className="bg-white py-24 px-6 relative overflow-hidden">
+      <section className="bg-white py-15 px-6 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
 
           {/* Top Badge */}
@@ -152,7 +152,7 @@ const Infrastructure = () => {
         </div>
       </section>
       {/* Infrastructure Layers Section */}
-      <section className="bg-[#06070a] py-24 px-6 border-y border-white/5">
+      <section className="bg-[#06070a] py-15 px-6 border-y border-white/5">
         <div className="max-w-[1400px] mx-auto">
 
           {/* Top Badge */}
@@ -260,7 +260,7 @@ const Infrastructure = () => {
         </div>
       </section>
       {/* Value Chain Section: Pipeline Overview */}
-      <section className="bg-white py-24 px-6">
+      <section className="bg-white py-15 px-6">
         <div className="max-w-[1400px] mx-auto">
 
           {/* Top Badge */}

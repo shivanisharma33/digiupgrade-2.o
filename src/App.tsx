@@ -17,7 +17,10 @@ const ARMS = lazy(() => import('./components/ARMS'));
 const Leadership = lazy(() => import('./components/Leadership'));
 const PressRelease = lazy(() => import('./components/PressRelease'));
 const InvestorRelations = lazy(() => import('./components/InvestorRelations'));
-const DemiPage = lazy(() => import('./components/DemiPage'));
+const DocumentsCharters = lazy(() => import('./components/DocumentsCharters'));
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
+const TermsOfUse = lazy(() => import('./components/TermsOfUse'));
+const EmailAlerts = lazy(() => import('./components/EmailAlerts'));
 
 export const ROUTES = {
   home: '/',
@@ -33,7 +36,10 @@ export const ROUTES = {
   leadership: '/leadership',
   pressRelease: '/press-release',
   investors: '/investors',
-  demi: '/demi',
+  documentsCharters: '/documents-charters',
+  privacyPolicy: '/privacy-policy',
+  termsOfUse: '/terms-of-use',
+  emailAlerts: '/email-alerts',
 } as const;
 
 function RouteFallback() {
@@ -94,7 +100,10 @@ export default function App() {
             <Route path={ROUTES.leadership} element={<Leadership />} />
             <Route path={ROUTES.pressRelease} element={<PressRelease />} />
             <Route path={ROUTES.investors} element={<InvestorRelations />} />
-            <Route path={ROUTES.demi} element={<DemiPage />} />
+            <Route path={ROUTES.documentsCharters} element={<DocumentsCharters />} />
+            <Route path={ROUTES.privacyPolicy} element={<PrivacyPolicy />} />
+            <Route path={ROUTES.termsOfUse} element={<TermsOfUse />} />
+            <Route path={ROUTES.emailAlerts} element={<EmailAlerts />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

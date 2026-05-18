@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
   FileText,
@@ -6,14 +6,46 @@ import {
   ArrowUpRight,
   Clock,
   Download,
-  ChevronRight
+  ChevronRight,
+  Calendar
 } from 'lucide-react';
 import NeuralCube3D from './NeuralCube3D';
 import { CTASection } from './Footer';
-import matrixBg from '../assets/matrix-bg.png';
-import gridBg from '../assets/ChatGPT Image May 11, 2026, 03_45_38 PM (1).png';
 
 const SECFilings = () => {
+  const filings = [
+    {
+      date: "May 15, 2026",
+      type: "FORM 10-Q",
+      desc: "TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934"
+    },
+    {
+      date: "May 12, 2026",
+      type: "SCHEDULE 13G",
+      desc: "SECURITIES AND EXCHANGE COMMISSION Washington, D.C. 20549"
+    },
+    {
+      date: "May 8, 2026",
+      type: "424B5",
+      desc: "PROSPECTUS SUPPLEMENT (To prospectus dated April 15, 2026 and prospectus supplement dated April 15, 2026)"
+    },
+    {
+      date: "April 28, 2026",
+      type: "FORM 8-K",
+      desc: "CURRENT REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934"
+    },
+    {
+      date: "April 15, 2026",
+      type: "FORM 10-Q",
+      desc: "QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934"
+    },
+    {
+      date: "March 24, 2026",
+      type: "FORM 4",
+      desc: "STATEMENT OF CHANGES IN BENEFICIAL OWNERSHIP OF SECURITIES"
+    }
+  ];
+
   return (
     <div className="bg-black min-h-screen text-white selection:bg-brand-yellow selection:text-black">
       {/* Hero Section */}
@@ -70,11 +102,6 @@ const SECFilings = () => {
             </div>
           </motion.div>
         </div>
-
-        <div className="mt-20 flex flex-col items-center gap-4 relative z-10">
-          <div className="text-[9px] font-semibold uppercase tracking-[0.4em] text-white/40">View Recent Filings</div>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-brand-yellow to-transparent" />
-        </div>
       </section>
 
       {/* Recent Filings Header (Light Contrast) */}
@@ -96,64 +123,59 @@ const SECFilings = () => {
       </section>
 
       {/* Filings Grid Section */}
-      <section className="bg-black py-24 relative overflow-hidden">
-        {/* Custom Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={gridBg} 
-            alt="Custom Background" 
-            className="w-full h-full object-cover opacity-80"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-
+      <section className="bg-[#f8f9fa] py-24 relative overflow-hidden border-t border-slate-100">
         <div className="container mx-auto px-6 max-w-[1400px] relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            {[1, 2, 3, 4, 5, 6].map((item, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {filings.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: i * 0.05, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="bg-white/[0.02] backdrop-blur-3xl border border-brand-yellow/30 p-10 rounded-2xl relative group hover:bg-white/[0.05] transition-all duration-300"
+                className="bg-white border border-slate-100 p-6 md:p-8 rounded-[24px] shadow-[0_8px_30px_rgb(0,0,0,0.02)] flex flex-col justify-between h-full min-h-[420px] transition-all hover:shadow-[0_15px_40px_rgba(0,0,0,0.06)] hover:scale-[1.02] duration-300 group"
               >
-                <div className="flex flex-col gap-6">
+                <div>
                   {/* Date Header */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-brand-yellow">
-                      <FileText size={14} />
-                      <span className="text-[10px] font-semibold uppercase tracking-[0.2em]">Filing Date</span>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-xl bg-[#f5c518]/10 text-[#f5c518] flex items-center justify-center flex-shrink-0">
+                      <Calendar size={18} className="stroke-[2.5]" />
                     </div>
-                    <div className="text-3xl font-semibold uppercase tracking-tighter text-white">May 12, 2026</div>
+                    <div className="flex flex-col text-left">
+                      <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Filing Date</span>
+                      <span className="text-slate-800 text-[13px] font-bold mt-0.5">{item.date}</span>
+                    </div>
                   </div>
 
-                  <div className="h-[1px] w-full bg-brand-yellow/30" />
-
-                  {/* Form Type */}
-                  <div className="space-y-3">
-                    <div className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest">Form Type</div>
-                    <div className="text-5xl font-semibold text-brand-yellow uppercase tracking-tighter leading-none">Schedule 13G</div>
+                  {/* Form Type Box */}
+                  <div className="bg-[#f5c518]/5 border border-[#f5c518]/15 rounded-[14px] p-5 mb-6 text-left flex flex-col justify-center">
+                    <span className="text-[10px] font-semibold text-[#f5c518]/85 uppercase tracking-wider mb-1">Form Type</span>
+                    <span className="text-slate-800 text-[20px] font-black tracking-tight leading-none">{item.type}</span>
                   </div>
-
-                  <div className="h-[1px] w-full bg-brand-yellow/30" />
 
                   {/* Description */}
-                  <div className="space-y-3">
-                    <div className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest">Description</div>
-                    <div className="text-[11px] font-semibold text-white uppercase leading-relaxed max-w-[320px]">
-                      SECURITIES AND EXCHANGE COMMISSION <br />
-                      Washington, D.C. 20549
-                    </div>
+                  <div className="text-left flex-1 mb-8">
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">Description</span>
+                    <p className="text-slate-600 text-[12px] font-semibold leading-relaxed tracking-tight line-clamp-3">
+                      {item.desc}
+                    </p>
                   </div>
+                </div>
 
-                  {/* Download Button */}
-                  <div className="pt-4">
-                    <button className="flex items-center gap-3 bg-brand-yellow text-black px-10 py-4 rounded-lg font-semibold text-[10px] uppercase tracking-[0.2em] hover:bg-white transition-all active:scale-[0.98]">
-                      <Download size={14} strokeWidth={3} />
+                {/* Connected Two-Tone Download Button */}
+                <div className="pt-2">
+                  <a 
+                    href="#"
+                    className="flex items-stretch w-full rounded-[14px] overflow-hidden shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 font-sans"
+                  >
+                    <div className="flex-1 bg-black text-white flex items-center justify-center gap-2.5 py-4 px-5 font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-[#1a1c20] transition-colors">
+                      <Download size={14} className="stroke-[3]" />
                       Download PDF
-                    </button>
-                  </div>
+                    </div>
+                    <div className="bg-[#f5c518] text-black flex items-center justify-center px-5 hover:bg-[#e0b30d] transition-colors">
+                      <ArrowUpRight size={16} className="stroke-[3]" />
+                    </div>
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -161,17 +183,17 @@ const SECFilings = () => {
           
           {/* Pagination */}
           <div className="mt-20 flex items-center justify-center gap-8">
-            <button className="text-white/40 hover:text-brand-yellow transition-colors cursor-pointer">
+            <button className="text-slate-400 hover:text-[#f5c518] transition-colors cursor-pointer bg-transparent border-0">
               <ChevronRight size={20} className="rotate-180" />
             </button>
             <div className="flex items-center gap-6 text-sm font-semibold uppercase tracking-widest">
-              <span className="text-brand-yellow border-b border-brand-yellow">1</span>
-              <span className="text-white/40 hover:text-white cursor-pointer transition-colors">2</span>
-              <span className="text-white/40 hover:text-white cursor-pointer transition-colors">3</span>
-              <span className="text-white/20">....</span>
-              <span className="text-white/40 hover:text-white cursor-pointer transition-colors">10</span>
+              <span className="text-[#f5c518] border-b border-[#f5c518] pb-1">1</span>
+              <span className="text-slate-400 hover:text-slate-800 cursor-pointer transition-colors">2</span>
+              <span className="text-slate-400 hover:text-slate-800 cursor-pointer transition-colors">3</span>
+              <span className="text-slate-300">....</span>
+              <span className="text-slate-400 hover:text-slate-800 cursor-pointer transition-colors">10</span>
             </div>
-            <button className="text-white/40 hover:text-brand-yellow transition-colors cursor-pointer">
+            <button className="text-slate-400 hover:text-[#f5c518] transition-colors cursor-pointer bg-transparent border-0">
               <ChevronRight size={20} />
             </button>
           </div>

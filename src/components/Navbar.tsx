@@ -32,10 +32,12 @@ const Navbar = () => {
     { name: 'Infrastructure', hasDropdown: true, sublinks: [
       { name: 'Global Network', path: '/infrastructure' },
       { name: 'ARMS Modular Systems', path: '/arms' },
-      { name: 'AI Infrastructure Model', path: '/demi' },
+      { name: 'Data Centers', path: '/data-centers' },
     ]},
     { name: 'Investors', hasDropdown: true, sublinks: [
       { name: 'SEC Filings', path: '/sec-filings' },
+      { name: 'Documents & Charters', path: '/documents-charters' },
+      { name: 'Email Alerts', path: '/email-alerts' },
       { name: 'Investor Center', path: '/investors' },
     ]},
     { name: 'Company', hasDropdown: true, sublinks: [
@@ -44,7 +46,6 @@ const Navbar = () => {
       { name: 'Press Release', path: '/press-release' },
       { name: 'Careers', path: '/careers' },
     ]},
-    { name: 'Data Centers', hasDropdown: false, path: '/data-centers' },
     { name: 'NeoCloudz', hasDropdown: false, path: '/neocloudz' },
   ];
 
@@ -78,7 +79,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md shadow-lg py-1' : 'bg-black py-2'} border-b border-white/10`}>
       <div className="max-w-[1800px] mx-auto px-4 md:px-8 flex items-center justify-between gap-4">
         <Link to="/" className="flex-shrink-0">
-          <img src={logoImg} alt="DigiPowerX Logo" className="h-10 md:h-12 lg:h-14 w-auto object-contain transition-all duration-300 brightness-0 invert" />
+          <img src={logoImg} alt="DigiPowerX Logo" className="h-12 md:h-20 lg:h-20 w-auto object-contain transition-all duration-300 brightness-0 invert" />
         </Link>
 
         {/* Desktop Links */}

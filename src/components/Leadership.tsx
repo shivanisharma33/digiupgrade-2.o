@@ -12,36 +12,111 @@ import {
 import NeuralCube3D from './NeuralCube3D';
 import { CTASection } from './Footer';
 
-// Leadership Portraits
-import CEO_IMG from '../assets/leadership/ceo.png';
-import PRESIDENT_IMG from '../assets/leadership/president.png';
-import CTO_IMG from '../assets/leadership/cto.png';
-
+// Leadership Portraits from public/images
 const Leadership = () => {
   const [selectedLeader, setSelectedLeader] = useState(null);
+  const [expandedBoardMember, setExpandedBoardMember] = useState(null);
 
   const executives = [
-    { name: "Michel Amar", role: "Chief Executive Officer", img: CEO_IMG, bio: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance." },
-    { name: "Alec Amar", role: "President", img: PRESIDENT_IMG, bio: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure. Under Mr. Amar's leadership, DigiPowerX has expanded into multiple U.S. markets with a growing portfolio of high-power data-center properties." },
-    { name: "Jagan Jeyapal", role: "Chief Technology Officer", img: CTO_IMG, bio: "Technical visionary driving the architecture of DigiPowerX's high-performance computing platforms and sustainable infrastructure solutions." },
-    { name: "Paul Ciullo", role: "Chief Financial Officer", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400", bio: "Financial strategist overseeing the company's fiscal health and capital allocation for massive infrastructure scaling." },
-    { name: "Daniel Rotunno", role: "VP of Operations", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400", bio: "Operations expert managing the complex logistics and site deployments for modular data centers." },
-    { name: "Luke Marchiori", role: "Chief Renewable Energy Officer", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400", bio: "Leading the integration of clean power sources with high-density compute facilities." }
+    { 
+      name: "Michel Amar", 
+      role: "Chief Executive Officer", 
+      img: "/images/96.jpg", 
+      bio: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance." 
+    },
+    { 
+      name: "Alec Amar", 
+      role: "President", 
+      img: "/images/95.jpg", 
+      bio: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure. Under Mr. Amar's leadership, DigiPowerX has expanded into multiple U.S. markets with a growing portfolio of high-power data-center properties." 
+    },
+    { 
+      name: "Jagan Jeyapal", 
+      role: "Chief Technology Officer", 
+      img: "/images/ChatGPT Image May 18, 2026, 04_04_34 PM.png", 
+      bio: "Technical visionary driving the architecture of DigiPowerX's high-performance computing platforms and sustainable infrastructure solutions." 
+    },
+    { 
+      name: "Paul Ciullo", 
+      role: "Chief Financial Officer", 
+      img: "/images/ChatGPT Image May 18, 2026, 04_04_37 PM.png", 
+      bio: "Financial strategist overseeing the company's fiscal health and capital allocation for massive infrastructure scaling." 
+    },
+    { 
+      name: "Daniel Rotunno", 
+      role: "VP of Operations", 
+      img: "/images/ChatGPT Image May 18, 2026, 04_04_39 PM.png", 
+      bio: "Operations expert managing the complex logistics and site deployments for modular data centers." 
+    },
+    { 
+      name: "Luke Marchiori", 
+      role: "Chief Renewable Energy Officer", 
+      img: "/images/ChatGPT Image May 18, 2026, 04_04_40 PM.png", 
+      bio: "Leading the integration of clean power sources with high-density compute facilities." 
+    },
+    { 
+      name: "Jim McCabe", 
+      role: "Advisor", 
+      img: "/images/ChatGPT Image May 18, 2026, 04_04_42 PM.png", 
+      bio: "Real estate and infrastructure development veteran with 15+ years of experience leading hyperscale site acquisitions and construction." 
+    },
+    { 
+      name: "Eddie Cloud", 
+      role: "Infrastructure and Development Lead", 
+      img: "/images/ChatGPT Image May 18, 2026, 04_04_43 PM.png", 
+      bio: "Specialist in thermal dynamics and structural engineering, pioneering innovative liquid cooling architectures for high-density AI clusters." 
+    },
+    { 
+      name: "Venkat Rangasamy", 
+      role: "VP of AI Infrastructure", 
+      img: "/images/ChatGPT Image May 18, 2026, 04_04_45 PM.png", 
+      bio: "Energy sector expert specializing in grid-scale renewable integration, microgrids, and high-voltage substation designs." 
+    },
+    { 
+      name: "Hans Vestberg", 
+      role: "Senior Advisor", 
+      img: "/images/97.jpg", 
+      bio: "Cybersecurity strategist safeguarding DigiPowerX's high-performance compute networks, physical assets, and data sovereignty." 
+    }
   ];
 
   const boardMembers = [
-    { name: "Michel Amar", role: "Chairman of the Board" },
-    { name: "Alec Amar", role: "Board Member" },
-    { name: "Gerard Rotonda", role: "Board Member", bio: "Mr. Rotonda was the Chief Financial Officer for Deutsche Bank Wealth Management Americas. He has over 30 years of experience in business development and financial analysis." },
-    { name: "Adam S. Rossman", role: "Board Member", bio: "Mr. Rossman is a business and real estate attorney with extensive experience in commercial real estate and trademark licensing." },
-    { name: "Ajay Gupta", role: "Board Member", bio: "Seasoned wealth management executive and Principal of Robbins Gupta Holdings. Advisor to global financial organizations." }
-  ];
-
-  const committees = [
-    { name: "Audit Committee", description: "Overseeing financial reporting, internal controls, and compliance.", members: ["Gerard Rotonda", "Adam S. Rossman", "Ajay Gupta"] },
-    { name: "Compensation Committee", description: "Ensuring executive compensation aligns with long-term shareholder value.", members: ["Adam S. Rossman", "Gerard Rotonda"] },
-    { name: "Governance & Nominating", description: "Identifying board candidates and overseeing corporate governance.", members: ["Adam S. Rossman", "Alec Amar", "Ajay Gupta"] },
-    { name: "Disclosure Committee", description: "Ensuring public disclosures are accurate, complete, and timely.", members: ["Michel Amar", "Gerard Rotonda", "Adam S. Rossman"] }
+    { 
+      name: "Michel Amar", 
+      role: "Chairman of the Board", 
+      img: "/images/michal (1).webp",
+      bio: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion." 
+    },
+    { 
+      name: "Alec Amar", 
+      role: "Board Member", 
+      img: "/images/alec.webp",
+      bio: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure." 
+    },
+    { 
+      name: "Gerard Rotonda", 
+      role: "Board Member", 
+      img: "/images/hans.webp",
+      bio: "Mr. Rotonda was the Chief Financial Officer for Deutsche Bank Wealth Management Americas. He has over 30 years of experience in business development and financial analysis." 
+    },
+    { 
+      name: "Adam S. Rossman", 
+      role: "Board Member", 
+      img: "/images/eddie.webp",
+      bio: "Mr. Rossman is a business and real estate attorney with extensive experience in commercial real estate and trademark licensing." 
+    },
+    { 
+      name: "Ajay Gupta", 
+      role: "Board Member", 
+      img: "/images/venkat.webp",
+      bio: "Seasoned wealth management executive and Principal of Robbins Gupta Holdings. Advisor to global financial organizations." 
+    },
+    { 
+      name: "Jim Haddon", 
+      role: "Board Member / Advisor", 
+      img: "/images/jim.jpg",
+      bio: "Investment banking and public finance expert with over 30 years of experience advising corporate and public entities on capital structuring." 
+    }
   ];
 
   return (
@@ -127,65 +202,119 @@ const Leadership = () => {
       </section>
 
       {/* Board of Directors Section */}
-      <section className="py-32 bg-white text-black relative overflow-hidden">
-        <div className="absolute top-0 right-0 p-24 opacity-[0.03] rotate-12">
-          <Users size={600} />
-        </div>
+      <section className="py-32 bg-[#050608] text-white relative overflow-hidden border-t border-white/5">
+        {/* Soft Ambient Technical Background Glows */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-yellow/[0.02] blur-[120px] pointer-events-none" />
 
         <div className="container mx-auto px-6 max-w-[1400px] relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-            <div>
-              <div className="text-[10px] font-semibold uppercase tracking-[0.5em] text-brand-yellow mb-8">Governance Body</div>
-              <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-8 relative z-10">BOARD OF <br /> DIRECTORS</h2>
-              <p className="text-black/60 text-lg font-medium leading-relaxed max-w-md">
-                A distinguished board providing strategic guidance, corporate governance, and long-term stewardship for DigiPowerX's global expansion.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {boardMembers.map((member, i) => (
-                <div key={i} className="group border-b border-black/10 py-8 hover:bg-black/[0.02] transition-colors px-6 rounded-lg cursor-pointer">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="text-2xl font-semibold uppercase tracking-tighter group-hover:text-brand-yellow transition-colors">{member.name}</h4>
-                      <div className="text-[10px] font-semibold text-black/30 uppercase tracking-widest mt-1">{member.role}</div>
-                    </div>
-                    <ChevronRight size={20} className="text-black/20 group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Committees Section */}
-      <section className="py-32 bg-black border-t border-white/10">
-        <div className="container mx-auto px-6 max-w-[1400px]">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
-            <div className="max-w-2xl">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.5em] text-brand-yellow mb-6">Structural Governance</div>
-              <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white mb-8 relative z-10">COMMITTEES</h2>
-            </div>
-            <div className="text-[11px] font-semibold text-white/30 uppercase tracking-[0.3em] border-l border-white/20 pl-8">
-              Regulatory compliance & <br /> strategic oversight
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {committees.map((committee, i) => (
-              <div key={i} className="p-12 bg-white/[0.02] border border-white/5 rounded-3xl hover:border-brand-yellow/30 transition-all group">
-                <h4 className="text-3xl font-semibold uppercase tracking-tighter mb-4 text-brand-yellow">{committee.name}</h4>
-                <p className="text-white/40 text-sm font-medium leading-relaxed mb-8">{committee.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {committee.members.map((member, m) => (
-                    <span key={m} className="px-3 py-1 rounded-md bg-white/5 text-[9px] font-semibold uppercase tracking-widest text-white/60">
-                      {member}
-                    </span>
-                  ))}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            
+            {/* Title & Info Pane */}
+            <div className="lg:col-span-5 space-y-8 order-1 lg:order-2">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.5em] text-brand-yellow mb-6">Governance Body</div>
+                <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white mb-8 relative z-10">
+                  BOARD OF <br /> <span className="text-white/40">DIRECTORS</span>
+                </h2>
+              </div>
+              
+              <div className="space-y-6">
+                <p className="text-white/60 text-lg font-medium leading-relaxed max-w-md">
+                  A distinguished assembly of industry veterans and legal counsel providing compliance-driven, corporate stewardship for DigiPowerX's global energy and high-density computing scaling.
+                </p>
+                <div className="h-0.5 w-16 bg-brand-yellow/30" />
+                <div className="text-[10px] font-semibold text-white/30 uppercase tracking-[0.25em]">
+                  Interactive Roster • Click a name to view biography
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Roster & Interactive Accordion Pane */}
+            <div className="lg:col-span-7 space-y-4 order-2 lg:order-1">
+              {boardMembers.map((member, i) => {
+                const isExpanded = expandedBoardMember === i;
+                return (
+                  <div 
+                    key={i} 
+                    onClick={() => setExpandedBoardMember(isExpanded ? null : i)}
+                    className={`group border transition-all duration-500 p-6 rounded-3xl cursor-pointer flex flex-col items-start gap-4 ${
+                      isExpanded 
+                        ? 'border-brand-yellow/40 bg-white/[0.03] shadow-[0_12px_40px_rgba(245,197,24,0.05)]' 
+                        : 'border-white/5 bg-white/[0.01] hover:border-white/20 hover:bg-white/[0.02]'
+                    }`}
+                  >
+                    {/* Header Row */}
+                    <div className="flex items-center gap-6 w-full">
+                      <div className={`w-16 h-16 rounded-full overflow-hidden border flex-shrink-0 bg-white/5 transition-all duration-500 ${
+                        isExpanded ? 'border-brand-yellow/40 ring-4 ring-brand-yellow/10' : 'border-white/10'
+                      }`}>
+                        <img 
+                          src={member.img} 
+                          alt={member.name} 
+                          className={`w-full h-full object-cover transition-all duration-500 scale-[1.02] ${
+                            isExpanded ? 'grayscale-0' : 'grayscale group-hover:grayscale-0 group-hover:scale-110'
+                          }`}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className={`text-2xl font-semibold uppercase tracking-tighter transition-colors ${
+                          isExpanded ? 'text-brand-yellow' : 'text-white group-hover:text-brand-yellow'
+                        }`}>{member.name}</h4>
+                        <div className="text-[10px] font-semibold text-white/40 uppercase tracking-widest mt-1">{member.role}</div>
+                      </div>
+                      
+                      {/* Interactive Chevron Indicators */}
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-500 ${
+                        isExpanded 
+                          ? 'border-brand-yellow/40 bg-brand-yellow/10 text-brand-yellow rotate-90' 
+                          : 'border-white/10 text-white/40 group-hover:border-white/20 group-hover:text-white'
+                      }`}>
+                        <ChevronRight size={18} />
+                      </div>
+                    </div>
+
+                    {/* Expandable Biography Section */}
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          className="overflow-hidden w-full"
+                        >
+                          <div className="pt-6 mt-6 border-t border-white/10 flex flex-col md:flex-row gap-6 items-start text-white/70">
+                            <div className="w-24 h-24 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 bg-white/5 self-center md:self-start shadow-xl">
+                              <img src={member.img} alt={member.name} className="w-full h-full object-cover scale-[1.02]" />
+                            </div>
+                            <div className="flex-1 space-y-4">
+                              <p className="text-base font-medium leading-relaxed text-white/80">
+                                {member.bio}
+                              </p>
+                              
+                              {/* Corporate Contact Utility Handles */}
+                              <div className="flex gap-3 pt-2">
+                                <button className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-xl font-semibold text-[10px] uppercase tracking-widest hover:bg-brand-yellow transition-all duration-300">
+                                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                  </svg>
+                                  LinkedIn
+                                </button>
+                                <button className="flex items-center gap-2 bg-white/5 border border-white/10 text-white px-5 py-2.5 rounded-xl font-semibold text-[10px] uppercase tracking-widest hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                                  <Mail size={12} className="text-white/60" />
+                                  Contact
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+
           </div>
         </div>
       </section>

@@ -142,7 +142,7 @@ const About = () => {
     <div ref={containerRef} className="bg-black text-white min-h-screen selection:bg-brand-yellow selection:text-black overflow-x-hidden">
 
       {/* Premium Hero (Matching Reference Image) */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-6 overflow-hidden bg-black">
+      <section className="relative min-h-[70vh] flex flex-col items-center justify-center pt-32 pb-12 px-6 overflow-hidden bg-black">
         
         {/* Background Matrix Grid & 3D Visual */}
         <div className="absolute inset-0 z-0 opacity-[0.2]">
@@ -193,7 +193,7 @@ const About = () => {
         </div>
 
         {/* Bottom HUD Stats Bar */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-[1200px] px-6">
+        <div className="w-full max-w-[1200px] px-6 mt-16 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -216,11 +216,11 @@ const About = () => {
       </section>
 
       {/* Company Overview Section (Matching Reference Image) */}
-      <section className="relative py-40 bg-black overflow-hidden">
+      <section className="relative pt-5 pb-12 bg-black overflow-hidden">
         <div className="container mx-auto px-6 max-w-[1400px]">
-          <div className="flex flex-col items-center text-center mb-24">
+          <div className="flex flex-col items-center text-center mb-12">
             {/* Top Overview Badge */}
-            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-white/20 mb-16 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-white/20 mb-8 backdrop-blur-sm">
               <div className="flex items-center gap-1.5">
                 <div className="h-[2px] w-8 bg-brand-yellow" />
                 <div className="h-[2px] w-2 bg-white/20" />
@@ -273,11 +273,11 @@ const About = () => {
       </section>
 
       {/* Mission Section (Light Theme Contrast - Matching Reference Image) */}
-      <section className="relative py-40 bg-white text-black overflow-hidden">
+      <section className="relative pt-16 pb-12 bg-white text-black overflow-hidden">
         <div className="container mx-auto px-6 max-w-[1400px]">
-          <div className="flex flex-col items-center text-center mb-24">
+          <div className="flex flex-col items-center text-center mb-12">
             {/* Mission Badge */}
-            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-black/10 mb-16">
+            <div className="inline-flex items-center gap-4 px-6 py-2 rounded-full border border-black/10 mb-8">
               <div className="flex items-center gap-1.5">
                 <div className="h-[2px] w-8 bg-brand-yellow" />
                 <div className="h-[2px] w-2 bg-black/10" />
@@ -340,7 +340,7 @@ const About = () => {
         </div>
       </section>
       {/* Financial Metrics Matrix (Matching Reference Image) */}
-      <section className="py-24 bg-black border-y border-white/10">
+      <section className="py-10 bg-black border-y border-white/10">
         <div className="container mx-auto px-6 max-w-[1400px]">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-0">
             {[
