@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CTASection } from './Footer';
 import DgxGlobe from './DgxGlobe';
+import EnergyHeroCanvas from './EnergyHeroCanvas';
 
 const GlobalNetwork = () => {
   return (
@@ -10,11 +11,9 @@ const GlobalNetwork = () => {
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex flex-col items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
 
-        {/* Background animation slot */}
-        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none flex items-center justify-center">
-          <div className="w-full h-full max-w-6xl">
-            <DgxGlobe />
-          </div>
+        {/* Background Cyber Rain Element */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <EnergyHeroCanvas />
         </div>
 
         {/* Content Container */}
