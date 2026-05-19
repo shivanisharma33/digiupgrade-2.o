@@ -69,8 +69,8 @@
 }
 
 .pio-headline h1 {
-  font-size: clamp(42px, 6.6vw, 108px);
-  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 600;
   letter-spacing: -.03em;
   line-height: .92;
   text-transform: uppercase;

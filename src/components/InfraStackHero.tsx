@@ -172,9 +172,14 @@ export default function InfraStackHero() {
       ([1, 2, 3, 4] as LayerId[]).forEach((n) => {
         const ptEl = pointRefs.current[n];
         if (!ptEl) return;
-        const cyPx = CY[n] * scale;
-        ptEl.style.top = `${cyPx}px`;
-        ptEl.style.transform = "translateY(-50%)";
+        if (window.innerWidth <= 1060) {
+          ptEl.style.top = '';
+          ptEl.style.transform = '';
+        } else {
+          const cyPx = CY[n] * scale;
+          ptEl.style.top = `${cyPx}px`;
+          ptEl.style.transform = "translateY(-50%)";
+        }
       });
     };
 
@@ -189,7 +194,7 @@ export default function InfraStackHero() {
 
     window.addEventListener("resize", positionLabels);
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(positionLabels).catch(() => {});
+      document.fonts.ready.then(positionLabels).catch(() => { });
     }
 
     return () => {

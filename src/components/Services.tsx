@@ -21,7 +21,7 @@ const SectionLabel = ({ num, text, dark = false }: { num: string, text: string, 
     initial={{ opacity: 0, y: -20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className="mb-12 relative z-10 flex justify-center"
+    className="mb-8 lg:mb-12 relative z-10 flex justify-center"
   >
     <div className={`inline-flex items-center gap-3 ${dark ? 'bg-white/5 border-white/10' : 'bg-white border-gray-100 shadow-sm'} border rounded-full px-6 py-2.5`}>
       <span className={`text-[10px] font-semibold tracking-widest ${dark ? 'text-white/40' : 'text-gray-400'}`}>{num} /</span>
@@ -128,7 +128,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold text-white leading-[0.95] tracking-tighter uppercase mb-12 relative z-10"
+              className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold text-white leading-[0.95] tracking-tighter uppercase mb-8 lg:mb-12 relative z-10"
             >
               Services & <br />
               <span className="text-[#f5c518] relative inline-block">
@@ -140,7 +140,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto mb-16 leading-relaxed font-medium uppercase tracking-tight"
+              className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto mb-10 lg:mb-16 leading-relaxed font-medium uppercase tracking-tight"
             >
               Enterprise-grade AI infrastructure, designed for scale and high-density performance across all powered DigiPowerX sites.
             </motion.p>
@@ -149,7 +149,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center gap-10 pb-12"
+              className="flex flex-wrap items-center justify-center gap-6 lg:gap-10 pb-8 lg:pb-12"
             >
               <button className="px-12 py-6 bg-[#f5c518] text-black font-semibold uppercase tracking-[0.2em] text-[12px] rounded-md hover:bg-white transition-all shadow-[0_15px_50px_rgba(245,197,24,0.3)] flex items-center gap-4 group">
                 Talk to Team <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -178,7 +178,7 @@ export default function Services() {
         {/* Bottom Snapshot Metrics (Full Width) */}
         <div className="w-full mt-auto relative z-20 border-t border-white/5 bg-black/40 backdrop-blur-3xl">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-0 py-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-0 py-8 lg:py-12">
               {[
                 { label: "Power Generation", val: "60MW" },
                 { label: "Data Center", val: "22MW" },
@@ -196,32 +196,32 @@ export default function Services() {
       </section>
 
       {/* ── 01 / Power & Colocation (Light) ── */}
-      <section className="bg-[#f8f9fa] py-32 md:py-15 relative overflow-hidden">
+      <section className="bg-[#f8f9fa] py-10 lg:py-16 relative overflow-hidden">
         {/* Subtle technical grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_10%,transparent_100%)] opacity-[0.03] pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-32">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 mb-10 lg:mb-16">
             <div className="max-w-2xl">
               {/* <SectionLabel num="01" text="Infrastructure Layer" /> */}
-              <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-8 relative z-10 mt-8">
+              <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-0 relative z-10 mt-4 lg:mt-8">
                 POWER & <br /><span className="text-[#f5c518]">COLOCATION.</span>
               </h2>
             </div>
             <div className="max-w-md lg:text-right">
-              <p className="text-gray-500 text-lg font-medium leading-relaxed">
+              <p className="text-gray-500 text-[15px] lg:text-lg font-medium leading-relaxed">
                 Vertical integration at the physical layer. We own the generation, the substation, and the high-density floor space.
               </p>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 mt-20">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Power Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white border border-gray-100 p-12 relative group overflow-hidden"
+              className="bg-white border border-gray-100 p-6 lg:p-12 relative group overflow-hidden"
             >
               {/* Card Blueprint Detail */}
               <div className="absolute top-0 right-0 p-4 opacity-10 font-mono text-[8px] text-black leading-tight pointer-events-none">
@@ -231,21 +231,21 @@ export default function Services() {
               </div>
 
               <div className="flex flex-col h-full relative z-10">
-                <div className="flex items-start justify-between mb-12">
-                  <div className="w-16 h-16 bg-black text-[#f5c518] flex items-center justify-center">
+                <div className="flex items-start justify-between mb-8 lg:mb-12">
+                  <div className="w-16 h-16 bg-black text-[#f5c518] flex items-center justify-center shrink-0">
                     <Zap size={32} />
                   </div>
                   <span className="text-[10px] font-semibold text-gray-300 uppercase tracking-[0.3em] vertical-rl rotate-180">GEN_CAPACITY</span>
                 </div>
 
-                <h3 className="text-3xl font-semibold uppercase tracking-tighter text-black mb-4">Power Infrastructure</h3>
-                <p className="text-gray-400 font-medium mb-12 text-sm uppercase tracking-widest">Generation & BTMG Access</p>
+                <h3 className="text-2xl lg:text-3xl font-semibold uppercase tracking-tighter text-black mb-3 lg:mb-4">Power Infrastructure</h3>
+                <p className="text-gray-400 font-medium mb-8 lg:mb-12 text-sm uppercase tracking-widest">Generation & BTMG Access</p>
 
-                <p className="text-gray-500 font-medium mb-12 text-[15px] leading-relaxed">
+                <p className="text-gray-500 font-medium mb-8 lg:mb-12 text-[14px] lg:text-[15px] leading-relaxed">
                   Owned power generation at the North Tonawanda plant provides the cost foundation for all DigiPowerX services. Behind-the-meter generation reduces power cost to industry-leading levels.
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 mb-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 lg:gap-y-6 gap-x-8 mb-10 lg:mb-16">
                   {[
                     "60MW Gas Plant",
                     "BTMG Program Access",
@@ -272,7 +272,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-white border border-gray-100 p-12 relative group overflow-hidden"
+              className="bg-white border border-gray-100 p-6 lg:p-12 relative group overflow-hidden"
             >
               {/* Card Blueprint Detail */}
               <div className="absolute top-0 right-0 p-4 opacity-10 font-mono text-[8px] text-black leading-tight pointer-events-none">
@@ -282,21 +282,21 @@ export default function Services() {
               </div>
 
               <div className="flex flex-col h-full relative z-10">
-                <div className="flex items-start justify-between mb-12">
-                  <div className="w-16 h-16 bg-black text-[#f5c518] flex items-center justify-center">
+                <div className="flex items-start justify-between mb-8 lg:mb-12">
+                  <div className="w-16 h-16 bg-black text-[#f5c518] flex items-center justify-center shrink-0">
                     <Server size={32} />
                   </div>
                   <span className="text-[10px] font-semibold text-gray-300 uppercase tracking-[0.3em] vertical-rl rotate-180">SPACE_ALLOCATION</span>
                 </div>
 
-                <h3 className="text-3xl font-semibold uppercase tracking-tighter text-black mb-4">Data Center Colocation</h3>
-                <p className="text-gray-400 font-medium mb-12 text-sm uppercase tracking-widest">AI-Ready High-Density Space</p>
+                <h3 className="text-2xl lg:text-3xl font-semibold uppercase tracking-tighter text-black mb-3 lg:mb-4">Data Center Colocation</h3>
+                <p className="text-gray-400 font-medium mb-8 lg:mb-12 text-sm uppercase tracking-widest">AI-Ready High-Density Space</p>
 
-                <p className="text-gray-500 font-medium mb-12 text-[15px] leading-relaxed">
+                <p className="text-gray-500 font-medium mb-8 lg:mb-12 text-[14px] lg:text-[15px] leading-relaxed">
                   Our Alabama facility provides high-density colocation designed specifically for GPU workloads, featuring advanced cooling and massive development pathways.
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 mb-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 lg:gap-y-6 gap-x-8 mb-10 lg:mb-16">
                   {[
                     "22MW Operating Base",
                     "80kW+ Rack Density",
@@ -321,24 +321,24 @@ export default function Services() {
       </section>
 
       {/* ── 02 / Advanced Tech (Dark) ── */}
-      <section className="bg-[#06070a] py-32 md:py-15 relative overflow-hidden text-white border-y border-white/5">
+      <section className="bg-[#06070a] pt-5 pb-10 lg:py-15 relative overflow-hidden text-white border-y border-white/5">
 
         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
           <SectionLabel num="02" text="Compute & Modular" dark />
 
-          <div className="grid lg:grid-cols-2 gap-32 items-center mb-30">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center mb-20 lg:mb-32">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white mb-8 relative z-10">
+              <h3 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white mb-6 lg:mb-8 relative z-10">
                 NEOCLOUDZ <br /><span className="text-[#f5c518]">GPU CLUSTERS</span>
               </h3>
-              <p className="text-gray-400 text-lg mb-12 leading-relaxed font-medium">
+              <p className="text-gray-400 text-[15px] lg:text-lg mb-8 lg:mb-12 leading-relaxed font-medium">
                 Dedicated bare-metal GPU capacity — NVIDIA B200 clusters with 400G InfiniBand fabric, targeting AI training, inference, and HPC workloads.
               </p>
-              <ul className="space-y-6 mb-12">
+              <ul className="space-y-4 lg:space-y-6 mb-8 lg:mb-12">
                 <FeatureItem text="16-node B200 cluster standard modules" dark />
                 <FeatureItem text="400G InfiniBand NDR fabric per cluster" dark />
                 <FeatureItem text="No virtualization — dedicated hardware access" dark />
@@ -353,7 +353,7 @@ export default function Services() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-32 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
             <div className="h-[600px] overflow-hidden relative group order-last lg:order-first">
               <ARMSModularVisual />
             </div>
@@ -362,13 +362,13 @@ export default function Services() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white mb-8 relative z-10">
+              <h3 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white mb-6 lg:mb-8 relative z-10">
                 ARMS <br /><span className="text-[#f5c518]">MODULAR SYSTEM</span>
               </h3>
-              <p className="text-gray-400 text-lg mb-12 leading-relaxed font-medium">
+              <p className="text-gray-400 text-[15px] lg:text-lg mb-8 lg:mb-12 leading-relaxed font-medium">
                 The ARMS platform provides factory-built, repeatable data center blocks — compressing deployment timelines from months to weeks.
               </p>
-              <ul className="space-y-6 mb-12">
+              <ul className="space-y-4 lg:space-y-6 mb-8 lg:mb-12">
                 <FeatureItem text="600kW base module — repeatable factory build" dark />
                 <FeatureItem text="Three-module 1.8MW standard campus block" dark />
                 <FeatureItem text="Site install connects to prepared power" dark />
@@ -383,53 +383,74 @@ export default function Services() {
       </section>
 
       {/* ── 03 / Integrated Advantage (Light & Sharp) ── */}
-      <section className="bg-white py-32 md:py-15 relative overflow-hidden">
+      <section className="bg-white pt-6 pb-6 lg:py-20 relative overflow-hidden">
         {/* Subtle background architecture */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gray-50/50 -skew-x-12 translate-x-32 pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-20 mb-32">
-            <div className="max-w-2xl">
+          <div className="flex flex-col items-center gap-2 mb-6 lg:mb-16 text-center">
+            <div className="max-w-2xl w-full">
               <SectionLabel num="03" text="Synergy Layer" />
-              <h2 className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-8 relative z-10 mt-8">
+              <h2 className="text-[clamp(2rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-black mb-0 relative z-10 text-center">
                 INTEGRATED <br /><span className="text-[#f5c518]">ADVANTAGE.</span>
               </h2>
-            </div>
-            <div className="lg:pt-24 max-w-sm">
-              <p className="text-gray-500 text-lg font-medium leading-relaxed italic">
-                "One company. Every layer. No finger-pointing."
-              </p>
             </div>
           </div>
         </div>
 
         {/* Integration Flow Visual - Full Width */}
-        <div className="mb-24 w-full bg-black text-white relative overflow-hidden py-16">
+        <div className="mb-4 lg:mb-16 w-full bg-black text-white relative overflow-hidden py-6 lg:py-14">
           <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
+
+            {/* Mobile: stacked with horizontal dividers */}
+            <div className="flex flex-col gap-0 md:hidden">
               {[
                 { label: "01_POWER", desc: "60MW Owned Generation" },
                 { label: "02_COLOCATION", desc: "AI-Ready High-Density Floor" },
                 { label: "03_COMPUTE", desc: "Bare-Metal B200 Clusters" }
               ].map((step, i) => (
                 <React.Fragment key={i}>
-                  <div className="text-center md:text-left group/step">
-                    <span className="text-[10px] font-semibold text-[#f5c518] tracking-[0.4em] mb-4 block group-hover/step:translate-x-2 transition-transform duration-500">{step.label}</span>
-                    <p className="text-2xl md:text-3xl font-semibold uppercase tracking-tighter">{step.desc}</p>
+                  <div className="text-center py-4">
+                    <span className="text-[10px] font-semibold text-[#f5c518] tracking-[0.4em] mb-1 block">{step.label}</span>
+                    <p className="text-[15px] font-semibold uppercase tracking-tight">{step.desc}</p>
+                  </div>
+                  {i < 2 && <div className="w-full h-px bg-white/10 relative">
+                    <motion.div
+                      animate={{ left: ['0%', '100%'] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      className="absolute top-1/2 -translate-y-1/2 w-12 h-[2px] bg-gradient-to-r from-transparent via-[#f5c518] to-transparent"
+                    />
+                  </div>}
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Tablet/Desktop: horizontal row with animated connectors */}
+            <div className="hidden md:flex items-center justify-between gap-4 lg:gap-8 xl:gap-12">
+              {[
+                { label: "01_POWER", desc: "60MW Owned Generation" },
+                { label: "02_COLOCATION", desc: "AI-Ready High-Density Floor" },
+                { label: "03_COMPUTE", desc: "Bare-Metal B200 Clusters" }
+              ].map((step, i) => (
+                <React.Fragment key={i}>
+                  <div className="text-left group/step min-w-0">
+                    <span className="text-[9px] lg:text-[10px] font-semibold text-[#f5c518] tracking-[0.3em] lg:tracking-[0.4em] mb-1 lg:mb-4 block group-hover/step:translate-x-2 transition-transform duration-500">{step.label}</span>
+                    <p className="text-sm md:text-base lg:text-xl xl:text-2xl font-semibold uppercase tracking-tighter break-words">{step.desc}</p>
                   </div>
                   {i < 2 && (
-                    <div className="hidden md:block h-px flex-1 bg-white/10 mx-12 relative">
+                    <div className="h-px flex-1 bg-white/10 relative min-w-[24px] lg:min-w-[40px] shrink-0">
                       <motion.div
                         animate={{ left: ['0%', '100%'] }}
                         transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                        className="absolute top-1/2 -translate-y-1/2 w-12 h-[2px] bg-gradient-to-r from-transparent via-[#f5c518] to-transparent"
+                        className="absolute top-1/2 -translate-y-1/2 w-8 lg:w-12 h-[2px] bg-gradient-to-r from-transparent via-[#f5c518] to-transparent"
                       />
                     </div>
                   )}
                 </React.Fragment>
               ))}
             </div>
+
           </div>
         </div>
 
@@ -447,12 +468,12 @@ export default function Services() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-12 bg-white group hover:bg-black transition-all duration-500"
+                className="p-4 lg:p-10 bg-white group hover:bg-black transition-all duration-500"
               >
-                <span className="text-[10px] font-semibold text-[#f5c518] mb-8 block">0{i + 1}</span>
-                <h4 className="text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-white mb-6 transition-colors">{item.title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed font-medium group-hover:text-gray-400 transition-colors">{item.desc}</p>
-                <div className="mt-12 h-1 w-8 bg-[#f5c518] group-hover:w-full transition-all duration-700 origin-left" />
+                <span className="text-[10px] font-semibold text-[#f5c518] mb-3 lg:mb-6 block">0{i + 1}</span>
+                <h4 className="text-base lg:text-2xl font-semibold uppercase tracking-tight text-black group-hover:text-white mb-2 lg:mb-5 transition-colors">{item.title}</h4>
+                <p className="text-gray-500 text-[12px] leading-relaxed font-medium group-hover:text-gray-400 transition-colors">{item.desc}</p>
+                <div className="mt-4 lg:mt-10 h-1 w-8 bg-[#f5c518] group-hover:w-full transition-all duration-700 origin-left" />
               </motion.div>
             ))}
           </div>

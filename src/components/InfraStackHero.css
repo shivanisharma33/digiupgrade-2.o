@@ -106,7 +106,7 @@
 #infra-stack-hero .ish-headline {
   font-family: 'Archivo', sans-serif;
   font-weight: 800;
-  font-size: clamp(34px, 4.4vw, 62px);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
@@ -609,12 +609,39 @@
   #infra-stack-hero .ish-right {
     order: 1;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
     min-height: auto;
   }
-  #infra-stack-hero .ish-stage { max-width: 480px; }
-  #infra-stack-hero .ish-points {
-    width: clamp(140px, 16vw, 180px);
+  #infra-stack-hero .ish-stage { 
+    max-width: 480px; 
+    width: 100%; 
+    aspect-ratio: auto;
+    height: auto;
   }
+  /* The SVG host div is the 3rd child, but let's be safe and target it via the dangerouslySetInnerHTML wrapper */
+  #infra-stack-hero .ish-stage > div[style*="width: 100%"] {
+    aspect-ratio: 820 / 860;
+  }
+  #infra-stack-hero .ish-points {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    margin-top: 16px;
+    gap: 12px;
+    justify-content: center;
+  }
+  #infra-stack-hero .ish-point {
+    position: static;
+    max-width: calc(50% - 6px);
+    flex: 1 1 calc(50% - 6px);
+    text-align: left;
+  }
+  #infra-stack-hero .ish-point::before { display: none; }
   #infra-stack-hero .ish-ptitle { font-size: 11px; }
   #infra-stack-hero .ish-pdesc { font-size: 9.5px; }
 }
@@ -634,28 +661,16 @@
     padding-right: 20px;
   }
   #infra-stack-hero .ish-right {
-    flex-direction: column;
-    align-items: center;
     gap: 16px;
   }
-  #infra-stack-hero .ish-stage { max-width: 100%; width: 100%; }
   #infra-stack-hero .ish-points {
-    position: static;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 0;
     gap: 8px;
     justify-content: flex-start;
   }
   #infra-stack-hero .ish-point {
-    position: static;
     max-width: calc(50% - 4px);
     flex: 1 1 calc(50% - 4px);
-    text-align: left;
   }
-  #infra-stack-hero .ish-point::before { right: auto; left: 0; }
   #infra-stack-hero .ish-ptitle { font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) {

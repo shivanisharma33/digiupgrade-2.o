@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Footer, CTASection } from './Footer';
 import { Zap, Shield, BatteryCharging, Activity, Server, Cpu } from 'lucide-react';
-import EnergyHeroVisual from './EnergyHeroVisual';
+import EnergyHeroCanvas from './EnergyHeroCanvas';
 import EnergyFlowDiagram from './EnergyFlowDiagram';
 
 const Infrastructure = () => {
@@ -13,11 +13,9 @@ const Infrastructure = () => {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
 
-        {/* Background 3D Element */}
-        <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
-          <div className="w-full h-full max-w-7xl relative">
-            <EnergyHeroVisual />
-          </div>
+        {/* Background Cyber Rain Element */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <EnergyHeroCanvas />
         </div>
 
         {/* Ambient Glow */}
@@ -41,7 +39,7 @@ const Infrastructure = () => {
             </div>
 
             {/* Title */}
-            <h1 className="text-[clamp(3rem,8vw,7rem)] font-bold tracking-tighter leading-[0.9] text-center mb-8 uppercase relative z-10">
+            <h1 className="text-[clamp(3rem,8vw,7rem)] font-semibold tracking-tighter leading-[0.9] text-center mb-8 uppercase relative z-10">
               <span className="block text-white">ENERGY</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#f5c518] to-[#ffda66]">
                 PORTFOLIO

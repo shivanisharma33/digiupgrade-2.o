@@ -102,7 +102,7 @@ const NeoCloudzSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-7xl font-semibold leading-[1.1] tracking-tight uppercase mb-6"
+            className="text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[1.1] tracking-tight uppercase mb-6"
           >
             <span className="text-white">MEET </span>
             <span className="text-[#00e878] drop-shadow-[0_0_15px_rgba(0,232,120,0.3)]">NEO</span>

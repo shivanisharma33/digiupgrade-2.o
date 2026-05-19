@@ -115,7 +115,7 @@ const FourPillars = () => {
 
 
         {/* 2x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 md:gap-x-16 gap-y-12 md:gap-y-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 md:gap-x-16 gap-y-12 md:gap-y-16">
 
           {/* Pillar 1: WE OWN THE POWER */}
           <div className="flex flex-col">
