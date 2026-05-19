@@ -11,482 +11,338 @@ const EnergyHeroVisual = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let w = 0, h = 0, dpr = 1, raf = 0, dead = false;
-
+    let w = 0, h = 0, dpr = 1, raf = 0;
+    
+    // Resize handler
     const resize = () => {
       const r = container.getBoundingClientRect();
-      dpr = Math.min(devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = r.width; h = r.height;
       canvas.width = w * dpr; canvas.height = h * dpr;
       canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
-    addEventListener('resize', resize);
+    window.addEventListener('resize', resize);
 
-    /* ── isometric helpers ── */
-    const iso = (x: number, y: number, z: number) => ({
-      x: w / 2 + (x - z) * 0.866,
-      y: h / 2 + 40 + (x + z) * 0.5 - y
-    });
-    const isoLine = (x1: number, y1: number, z1: number, x2: number, y2: number, z2: number) => {
-      const a = iso(x1, y1, z1), b = iso(x2, y2, z2);
-      ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+    // --- Isometric Projection Helpers ---
+    // Angle parameters for a dramatic 3D isometric view
+    const angleX = Math.PI / 6; // 30 degrees
+    const angleZ = Math.PI / 4; // 45 degrees
+    
+    const iso = (x: number, y: number, z: number) => {
+      // Rotation around Y axis
+      const rx = x * Math.cos(angleZ) - z * Math.sin(angleZ);
+      const rz = x * Math.sin(angleZ) + z * Math.cos(angleZ);
+      // Rotation around X axis
+      const sx = rx;
+      const sy = y * Math.cos(angleX) - rz * Math.sin(angleX);
+      return {
+        x: w / 2 + sx,
+        y: h / 2 + 50 - sy
+      };
     };
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-    /* ── ambient cross-stars ── */
-    const stars = Array.from({ length: 90 }, () => ({
-      x: Math.random(), y: Math.random(),
-      s: Math.random() * 1.4 + 0.4,
-      sp: Math.random() * 1.2 + 0.4,
-      ph: Math.random() * Math.PI * 2
-    }));
+    const isoLine = (x1: number, y1: number, z1: number, x2: number, y2: number, z2: number) => {
+      const p1 = iso(x1, y1, z1);
+      const p2 = iso(x2, y2, z2);
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+    };
 
-    /* ── energy flow particles ── */
-    const flows = Array.from({ length: 24 }, () => ({
-      t: Math.random(), sp: Math.random() * 0.3 + 0.15, line: Math.floor(Math.random() * 5)
-    }));
+    // --- Scene Objects ---
+    
+    // Grid settings
+    const gridSize = 80;
+    
+    // AI Compute Pods (Data Center Clusters)
+    const pods: {x: number, z: number, h: number, seed: number, type: 'compute' | 'power'}[] = [];
+    
+    // Seed some pods
+    for(let r = -3; r <= 3; r++) {
+      for(let c = -3; c <= 3; c++) {
+        if(Math.random() > 0.4) {
+          const isPower = Math.random() > 0.8;
+          pods.push({
+            x: c * gridSize,
+            z: r * gridSize,
+            h: isPower ? 40 + Math.random() * 30 : 60 + Math.random() * 80,
+            seed: Math.random() * 100,
+            type: isPower ? 'power' : 'compute'
+          });
+        }
+      }
+    }
 
-    /* ── PLATFORM ── */
-    const drawPlatform = () => {
-      const sz = 200;
-      const corners = [iso(-sz, 0, -sz), iso(sz, 0, -sz), iso(sz, 0, sz), iso(-sz, 0, sz)];
-      // Thick edge with depth
-      const depth = 12;
-      const bCorners = [iso(-sz, -depth, -sz), iso(sz, -depth, -sz), iso(sz, -depth, sz), iso(-sz, -depth, sz)];
+    // Sort pods by depth (z - x) to render back-to-front
+    pods.sort((a, b) => (b.x + b.z) - (a.x + a.z));
 
-      // Side faces
-      ctx.fillStyle = 'rgba(255,255,255,0.015)';
-      // Front-left face
+    // Energy flow packets
+    const packets: {path: number[][], progress: number, speed: number, type: 'energy' | 'data'}[] = [];
+    
+    for(let i=0; i<30; i++) {
+      const startX = (Math.floor(Math.random() * 7) - 3) * gridSize;
+      const startZ = (Math.floor(Math.random() * 7) - 3) * gridSize;
+      const path = [];
+      path.push([startX, startZ]);
+      
+      let cx = startX;
+      let cz = startZ;
+      for(let step=0; step<4; step++) {
+        if(Math.random() > 0.5) cx += (Math.random() > 0.5 ? 1 : -1) * gridSize;
+        else cz += (Math.random() > 0.5 ? 1 : -1) * gridSize;
+        path.push([cx, cz]);
+      }
+      
+      packets.push({
+        path,
+        progress: Math.random(),
+        speed: 0.002 + Math.random() * 0.004,
+        type: Math.random() > 0.3 ? 'energy' : 'data'
+      });
+    }
+
+    // --- Drawing Functions ---
+    
+    const drawPod = (x: number, z: number, height: number, seed: number, type: 'compute' | 'power', time: number) => {
+      const w = 24;
+      const d = 24;
+      
+      // Base points
+      const p1 = iso(x - w, 0, z - d);
+      const p2 = iso(x + w, 0, z - d);
+      const p3 = iso(x + w, 0, z + d);
+      const p4 = iso(x - w, 0, z + d);
+      
+      // Top points
+      const t1 = iso(x - w, height, z - d);
+      const t2 = iso(x + w, height, z - d);
+      const t3 = iso(x + w, height, z + d);
+      const t4 = iso(x - w, height, z + d);
+
+      // Colors
+      const isPower = type === 'power';
+      const sideColor1 = isPower ? 'rgba(200, 150, 10, 0.2)' : 'rgba(255, 255, 255, 0.03)';
+      const sideColor2 = isPower ? 'rgba(150, 100, 0, 0.4)' : 'rgba(255, 255, 255, 0.06)';
+      const topColor = isPower ? 'rgba(245, 197, 24, 0.15)' : 'rgba(255, 255, 255, 0.1)';
+      const strokeColor = isPower ? 'rgba(245, 197, 24, 0.4)' : 'rgba(255, 255, 255, 0.15)';
+
+      // Left face
       ctx.beginPath();
-      ctx.moveTo(corners[3].x, corners[3].y); ctx.lineTo(corners[2].x, corners[2].y);
-      ctx.lineTo(bCorners[2].x, bCorners[2].y); ctx.lineTo(bCorners[3].x, bCorners[3].y);
-      ctx.closePath(); ctx.fill();
-      // Front-right face
+      ctx.moveTo(p4.x, p4.y);
+      ctx.lineTo(p3.x, p3.y);
+      ctx.lineTo(t3.x, t3.y);
+      ctx.lineTo(t4.x, t4.y);
+      ctx.closePath();
+      ctx.fillStyle = sideColor1;
+      ctx.fill();
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Right face
       ctx.beginPath();
-      ctx.moveTo(corners[2].x, corners[2].y); ctx.lineTo(corners[1].x, corners[1].y);
-      ctx.lineTo(bCorners[1].x, bCorners[1].y); ctx.lineTo(bCorners[2].x, bCorners[2].y);
-      ctx.closePath(); ctx.fill();
+      ctx.moveTo(p3.x, p3.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.lineTo(t2.x, t2.y);
+      ctx.lineTo(t3.x, t3.y);
+      ctx.closePath();
+      ctx.fillStyle = sideColor2;
+      ctx.fill();
+      ctx.stroke();
 
       // Top face
       ctx.beginPath();
-      ctx.moveTo(corners[0].x, corners[0].y);
-      corners.forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.moveTo(t1.x, t1.y);
+      ctx.lineTo(t2.x, t2.y);
+      ctx.lineTo(t3.x, t3.y);
+      ctx.lineTo(t4.x, t4.y);
       ctx.closePath();
-      ctx.fillStyle = 'rgba(255,255,255,0.025)';
+      ctx.fillStyle = topColor;
       ctx.fill();
-
-      // Grid on top
-      ctx.strokeStyle = 'rgba(255,255,255,0.035)';
-      ctx.lineWidth = 0.5;
-      ctx.beginPath();
-      for (let i = -5; i <= 5; i++) {
-        const v = i * (sz / 5);
-        isoLine(-sz, 0, v, sz, 0, v);
-        isoLine(v, 0, -sz, v, 0, sz);
-      }
       ctx.stroke();
 
-      // Border
-      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(corners[0].x, corners[0].y);
-      corners.forEach(p => ctx.lineTo(p.x, p.y));
-      ctx.closePath(); ctx.stroke();
-      // Side edges
-      ctx.beginPath();
-      ctx.moveTo(corners[3].x, corners[3].y); ctx.lineTo(bCorners[3].x, bCorners[3].y);
-      ctx.moveTo(corners[2].x, corners[2].y); ctx.lineTo(bCorners[2].x, bCorners[2].y);
-      ctx.moveTo(corners[1].x, corners[1].y); ctx.lineTo(bCorners[1].x, bCorners[1].y);
-      ctx.moveTo(bCorners[3].x, bCorners[3].y); ctx.lineTo(bCorners[2].x, bCorners[2].y);
-      ctx.lineTo(bCorners[1].x, bCorners[1].y);
-      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-      ctx.stroke();
-    };
-
-    /* ── SOLAR PANEL ── */
-    const drawSolarPanel = (ox: number, oz: number, sc: number, t: number) => {
-      const pw = 48 * sc, pd = 30 * sc, legH = 22 * sc, tiltH = 38 * sc;
-
-      // Support structure
-      ctx.strokeStyle = 'rgba(255,255,255,0.18)';
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      isoLine(ox - pw * 0.35, 0, oz, ox - pw * 0.35, legH, oz);
-      isoLine(ox + pw * 0.35, 0, oz, ox + pw * 0.35, legH, oz);
-      // Cross brace
-      isoLine(ox - pw * 0.35, legH * 0.5, oz, ox + pw * 0.35, legH * 0.5, oz);
-      ctx.stroke();
-
-      // Panel face — tilted
-      const c = [
-        iso(ox - pw, tiltH, oz - pd),
-        iso(ox + pw, tiltH, oz - pd),
-        iso(ox + pw, tiltH - 8 * sc, oz + pd),
-        iso(ox - pw, tiltH - 8 * sc, oz + pd),
-      ];
-
-      // Panel fill
-      ctx.beginPath();
-      ctx.moveTo(c[0].x, c[0].y);
-      c.forEach(p => ctx.lineTo(p.x, p.y));
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(255,255,255,0.045)';
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.22)';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-
-      // Cell grid (3 rows × 4 cols)
-      const rows = 3, cols = 4;
-      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
-      ctx.lineWidth = 0.4;
-      ctx.beginPath();
-      for (let r = 1; r < rows; r++) {
-        const f = r / rows;
-        ctx.moveTo(lerp(c[0].x, c[3].x, f), lerp(c[0].y, c[3].y, f));
-        ctx.lineTo(lerp(c[1].x, c[2].x, f), lerp(c[1].y, c[2].y, f));
-      }
-      for (let cl = 1; cl < cols; cl++) {
-        const f = cl / cols;
-        ctx.moveTo(lerp(c[0].x, c[1].x, f), lerp(c[0].y, c[1].y, f));
-        ctx.lineTo(lerp(c[3].x, c[2].x, f), lerp(c[3].y, c[2].y, f));
-      }
-      ctx.stroke();
-
-      // Animated active cell shimmer
-      const cellIdx = Math.floor((t * 0.6 + ox * 0.02) % (rows * cols));
-      const cr = Math.floor(cellIdx / cols), cc = cellIdx % cols;
-      const cellCorner = (r: number, cl: number) => ({
-        x: lerp(lerp(c[0].x, c[1].x, cl / cols), lerp(c[3].x, c[2].x, cl / cols), r / rows),
-        y: lerp(lerp(c[0].y, c[1].y, cl / cols), lerp(c[3].y, c[2].y, cl / cols), r / rows),
-      });
-      const tl = cellCorner(cr, cc), tr = cellCorner(cr, cc + 1);
-      const bl = cellCorner(cr + 1, cc), br = cellCorner(cr + 1, cc + 1);
-      ctx.beginPath();
-      ctx.moveTo(tl.x, tl.y); ctx.lineTo(tr.x, tr.y);
-      ctx.lineTo(br.x, br.y); ctx.lineTo(bl.x, bl.y); ctx.closePath();
-      const shimmer = 0.12 + Math.sin(t * 4) * 0.08;
-      ctx.fillStyle = `rgba(255,255,255,${shimmer})`;
-      ctx.fill();
-    };
-
-    /* ── WIND TURBINE ── */
-    const drawTurbine = (ox: number, oz: number, sc: number, t: number, rpm: number) => {
-      const poleH = 95 * sc;
-      const hub = iso(ox, poleH, oz);
-      const base = iso(ox, 0, oz);
-      const mid = iso(ox, poleH * 0.5, oz);
-
-      // Foundation circle
-      ctx.beginPath();
-      ctx.ellipse(base.x, base.y, 6 * sc, 3 * sc, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.06)';
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-
-      // Pole — tapered (thicker at base)
-      ctx.beginPath();
-      ctx.moveTo(base.x - 2.5 * sc, base.y);
-      ctx.lineTo(hub.x - 1 * sc, hub.y);
-      ctx.lineTo(hub.x + 1 * sc, hub.y);
-      ctx.lineTo(base.x + 2.5 * sc, base.y);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(255,255,255,0.04)';
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-      ctx.lineWidth = 0.6;
-      ctx.stroke();
-
-      // Nacelle (housing box at top)
-      ctx.fillStyle = 'rgba(255,255,255,0.08)';
-      ctx.fillRect(hub.x - 5 * sc, hub.y - 3 * sc, 10 * sc, 5 * sc);
-      ctx.strokeStyle = 'rgba(255,255,255,0.18)';
-      ctx.lineWidth = 0.6;
-      ctx.strokeRect(hub.x - 5 * sc, hub.y - 3 * sc, 10 * sc, 5 * sc);
-
-      // Blades — 3 with proper tapered shape
-      const bladeLen = 42 * sc;
-      const angle = t * rpm;
-      ctx.lineWidth = 1.2;
-      for (let b = 0; b < 3; b++) {
-        const a = angle + (b * Math.PI * 2) / 3;
-        const tipX = hub.x + Math.cos(a) * bladeLen;
-        const tipY = hub.y + Math.sin(a) * bladeLen * 0.45;
-        // Blade body (tapered)
-        const perpX = -Math.sin(a) * 2.5 * sc;
-        const perpY = -Math.cos(a) * 2.5 * sc * 0.45;
+      // Inner details / server racks
+      if(type === 'compute') {
+        const layers = Math.floor(height / 15);
+        for(let l=1; l<layers; l++) {
+          const lh = l * 15;
+          const leftMid = iso(x - w, lh, z + d);
+          const rightMid = iso(x + w, lh, z - d);
+          const frontMid = iso(x + w, lh, z + d);
+          
+          ctx.beginPath();
+          ctx.moveTo(leftMid.x, leftMid.y);
+          ctx.lineTo(frontMid.x, frontMid.y);
+          ctx.lineTo(rightMid.x, rightMid.y);
+          ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+          ctx.stroke();
+          
+          // Blinking rack lights
+          const lightActive = Math.sin(time * 5 + seed + l) > 0.5;
+          if(lightActive) {
+            ctx.beginPath();
+            ctx.arc(frontMid.x - 5, frontMid.y - 2, 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 232, 120, 0.8)';
+            ctx.shadowColor = 'rgba(0, 232, 120, 0.8)';
+            ctx.shadowBlur = 5;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        }
+      } else {
+        // Power generation core
+        const coreH = height * (0.4 + Math.sin(time * 2 + seed) * 0.1);
+        const c1 = iso(x, 0, z);
+        const c2 = iso(x, coreH, z);
         ctx.beginPath();
-        ctx.moveTo(hub.x + perpX, hub.y + perpY);
-        ctx.lineTo(tipX, tipY);
-        ctx.lineTo(hub.x - perpX, hub.y - perpY);
-        ctx.closePath();
-        ctx.fillStyle = `rgba(255,255,255,${0.06 + Math.sin(a) * 0.02})`;
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(255,255,255,0.35)';
-        ctx.lineWidth = 0.8;
+        ctx.moveTo(c1.x, c1.y);
+        ctx.lineTo(c2.x, c2.y);
+        ctx.strokeStyle = '#f5c518';
+        ctx.lineWidth = 4;
+        ctx.shadowColor = '#f5c518';
+        ctx.shadowBlur = 15;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.lineWidth = 1;
+      }
+    };
+
+    // --- Main Render Loop ---
+    const render = (time: number) => {
+      const t = time * 0.001;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Center the whole scene slightly
+      ctx.save();
+      
+      // 1. Draw Base Grid
+      ctx.lineWidth = 1;
+      const ext = 4 * gridSize;
+      
+      for(let i = -4; i <= 4; i++) {
+        const v = i * gridSize;
+        
+        // Glow effect for grid
+        const dist = Math.abs(i) / 4;
+        const alpha = Math.max(0, 0.15 - dist * 0.1);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+        
+        ctx.beginPath();
+        isoLine(v, 0, -ext, v, 0, ext);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        isoLine(-ext, 0, v, ext, 0, v);
         ctx.stroke();
       }
 
-      // Hub center dot
-      ctx.beginPath();
-      ctx.arc(hub.x, hub.y, 2.5 * sc, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.fill();
-    };
-
-    /* ── TRANSMISSION TOWER ── */
-    const drawTower = (ox: number, oz: number, sc: number) => {
-      const th = 120 * sc;
-      const baseW = 18 * sc;
-      const topW = 5 * sc;
-
-      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-      ctx.lineWidth = 0.7;
-      ctx.beginPath();
-
-      // Main legs
-      isoLine(ox - baseW, 0, oz, ox - topW, th, oz);
-      isoLine(ox + baseW, 0, oz, ox + topW, th, oz);
-
-      // Horizontal braces + X cross braces
-      const levels = 6;
-      for (let i = 1; i <= levels; i++) {
-        const f = i / (levels + 1);
-        const lx = lerp(ox - baseW, ox - topW, f);
-        const rx = lerp(ox + baseW, ox + topW, f);
-        const yy = th * f;
-        isoLine(lx, yy, oz, rx, yy, oz);
-        if (i < levels) {
-          const nf = (i + 1) / (levels + 1);
-          const nlx = lerp(ox - baseW, ox - topW, nf);
-          const nrx = lerp(ox + baseW, ox + topW, nf);
-          const nyy = th * nf;
-          isoLine(lx, yy, oz, nrx, nyy, oz);
-          isoLine(rx, yy, oz, nlx, nyy, oz);
+      // 2. Draw Connection Nodes
+      for(let r = -4; r <= 4; r++) {
+        for(let c = -4; c <= 4; c++) {
+          const pt = iso(c * gridSize, 0, r * gridSize);
+          const dist = Math.sqrt(r*r + c*c) / 5;
+          const alpha = Math.max(0, 0.2 - dist * 0.15);
+          
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+          ctx.fill();
         }
       }
 
-      // Top cross-arms
-      const armW = 28 * sc;
-      isoLine(ox - topW, th, oz, ox - armW, th * 0.92, oz);
-      isoLine(ox + topW, th, oz, ox + armW, th * 0.92, oz);
-      isoLine(ox - topW, th, oz, ox - armW * 0.85, th * 1.04, oz);
-      isoLine(ox + topW, th, oz, ox + armW * 0.85, th * 1.04, oz);
-
-      // Peak
-      isoLine(ox - topW, th, oz, ox, th * 1.12, oz);
-      isoLine(ox + topW, th, oz, ox, th * 1.12, oz);
-
-      ctx.stroke();
-
-      // Insulator dots on arms
-      const insulators = [
-        iso(ox - armW, th * 0.92, oz),
-        iso(ox + armW, th * 0.92, oz),
-        iso(ox - armW * 0.85, th * 1.04, oz),
-        iso(ox + armW * 0.85, th * 1.04, oz),
-      ];
-      insulators.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.35)';
-        ctx.fill();
-      });
-    };
-
-    /* ── BATTERY STORAGE ── */
-    const drawBattery = (ox: number, oz: number, sc: number, t: number) => {
-      const bh = 70 * sc, br = 26 * sc;
-      const base = iso(ox, 0, oz), top = iso(ox, bh, oz);
-      const eRx = br, eRy = br * 0.32;
-
-      // Body fill
-      ctx.fillStyle = 'rgba(255,255,255,0.02)';
-      ctx.beginPath();
-      ctx.moveTo(base.x - eRx, base.y);
-      ctx.lineTo(top.x - eRx, top.y);
-      ctx.ellipse(top.x, top.y, eRx, eRy, 0, Math.PI, 0, true);
-      ctx.lineTo(base.x + eRx, base.y);
-      ctx.ellipse(base.x, base.y, eRx, eRy, 0, 0, Math.PI, true);
-      ctx.closePath();
-      ctx.fill();
-
-      // Side lines
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-      ctx.lineWidth = 0.8;
-      ctx.beginPath();
-      ctx.moveTo(base.x - eRx, base.y); ctx.lineTo(top.x - eRx, top.y);
-      ctx.moveTo(base.x + eRx, base.y); ctx.lineTo(top.x + eRx, top.y);
-      ctx.stroke();
-
-      // Bottom ellipse
-      ctx.beginPath();
-      ctx.ellipse(base.x, base.y, eRx, eRy, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-      ctx.stroke();
-
-      // Animated fill level
-      const fillFrac = 0.55 + Math.sin(t * 0.4) * 0.3;
-      const fillY = iso(ox, bh * fillFrac, oz);
-
-      // Fill body
-      ctx.fillStyle = 'rgba(255,255,255,0.03)';
-      ctx.beginPath();
-      ctx.moveTo(base.x - eRx, base.y);
-      ctx.lineTo(fillY.x - eRx, fillY.y);
-      ctx.ellipse(fillY.x, fillY.y, eRx * 0.95, eRy * 0.9, 0, Math.PI, 0, true);
-      ctx.lineTo(base.x + eRx, base.y);
-      ctx.ellipse(base.x, base.y, eRx, eRy, 0, 0, Math.PI, true);
-      ctx.closePath();
-      ctx.fill();
-
-      // Fill level ellipse
-      ctx.beginPath();
-      ctx.ellipse(fillY.x, fillY.y, eRx * 0.95, eRy * 0.9, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255,255,255,${0.15 + Math.sin(t * 1.5) * 0.08})`;
-      ctx.lineWidth = 0.7;
-      ctx.stroke();
-      ctx.fillStyle = `rgba(255,255,255,${0.05 + Math.sin(t * 1.5) * 0.03})`;
-      ctx.fill();
-
-      // Top ellipse
-      ctx.beginPath();
-      ctx.ellipse(top.x, top.y, eRx, eRy, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-
-      // Ring details on body
-      for (let i = 1; i <= 3; i++) {
-        const ry = iso(ox, bh * (i / 4), oz);
-        ctx.beginPath();
-        ctx.ellipse(ry.x, ry.y, eRx * 0.98, eRy * 0.95, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-        ctx.lineWidth = 0.4;
-        ctx.stroke();
-      }
-    };
-
-    /* ── POWER LINES + ENERGY FLOW ── */
-    const lineAnchors: { x: number; y: number }[][] = [];
-
-    const drawPowerLines = (t: number) => {
-      lineAnchors.length = 0;
-
-      const segs: [number, number, number, number, number, number][] = [
-        [35, 105, -70, 95, 98, -35],    // tower ↔ tower
-        [95, 98, -35, 150, 55, 45],     // tower → battery
-        [-90, 35, -45, 35, 105, -70],   // solar → tower
-        [-50, 35, 55, 95, 98, -35],     // solar → tower
-        [-150, 70, -90, -90, 35, -45],  // turbine → solar area
-      ];
-
-      // Dashed lines with catenary sag
-      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
-      ctx.lineWidth = 0.7;
-      ctx.setLineDash([3, 5]);
-      segs.forEach(seg => {
-        const p1 = iso(seg[0], seg[1], seg[2]);
-        const p2 = iso(seg[3], seg[4], seg[5]);
-        const mx = (p1.x + p2.x) / 2;
-        const my = (p1.y + p2.y) / 2 + 10;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.quadraticCurveTo(mx, my, p2.x, p2.y);
-        ctx.stroke();
-        lineAnchors.push([p1, { x: mx, y: my }, p2]);
-      });
-      ctx.setLineDash([]);
-
-      // Flowing energy particles
-      flows.forEach(f => {
-        if (lineAnchors.length === 0) return;
-        const idx = f.line % lineAnchors.length;
-        const pts = lineAnchors[idx];
-        f.t = (f.t + f.sp * 0.006) % 1;
-        const tt = f.t;
-        const p0 = pts[0], p1 = pts[1], p2 = pts[2];
-        const px = (1 - tt) * (1 - tt) * p0.x + 2 * (1 - tt) * tt * p1.x + tt * tt * p2.x;
-        const py = (1 - tt) * (1 - tt) * p0.y + 2 * (1 - tt) * tt * p1.y + tt * tt * p2.y;
-
-        // Soft glow
-        const g = ctx.createRadialGradient(px, py, 0, px, py, 8);
-        g.addColorStop(0, 'rgba(255,255,255,0.5)');
-        g.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(px, py, 8, 0, Math.PI * 2); ctx.fill();
-
-        // Core dot
-        ctx.beginPath(); ctx.arc(px, py, 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${0.75 + Math.sin(t * 6 + f.t * 12) * 0.25})`;
-        ctx.fill();
-      });
-    };
-
-    /* ── MAIN DRAW LOOP ── */
-    const draw = () => {
-      if (dead) return;
-      const t = performance.now() * 0.001;
-      ctx.clearRect(0, 0, w, h);
-
-      // Ambient cross-stars
-      stars.forEach(s => {
-        const tw = 0.25 + 0.75 * ((Math.sin(t * s.sp + s.ph) + 1) * 0.5);
-        const sx = s.x * w, sy = s.y * h;
-        ctx.strokeStyle = `rgba(255,255,255,${tw * 0.25})`;
-        ctx.lineWidth = 0.6;
-        ctx.beginPath();
-        ctx.moveTo(sx - s.s, sy); ctx.lineTo(sx + s.s, sy);
-        ctx.moveTo(sx, sy - s.s); ctx.lineTo(sx, sy + s.s);
-        ctx.stroke();
+      // 3. Draw Energy / Data Packets (Trails)
+      packets.forEach(p => {
+        p.progress += p.speed;
+        if(p.progress > 1) p.progress = 0;
+        
+        const totalSegments = p.path.length - 1;
+        const currentSegment = Math.floor(p.progress * totalSegments);
+        const segmentProgress = (p.progress * totalSegments) - currentSegment;
+        
+        if (currentSegment < totalSegments) {
+          const p1 = p.path[currentSegment];
+          const p2 = p.path[currentSegment + 1];
+          
+          const cx = p1[0] + (p2[0] - p1[0]) * segmentProgress;
+          const cz = p1[1] + (p2[1] - p1[1]) * segmentProgress;
+          
+          const pt = iso(cx, 0, cz);
+          
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, p.type === 'energy' ? 3 : 2, 0, Math.PI * 2);
+          
+          if(p.type === 'energy') {
+            ctx.fillStyle = '#f5c518';
+            ctx.shadowColor = '#f5c518';
+            ctx.shadowBlur = 10;
+          } else {
+            ctx.fillStyle = '#00e878';
+            ctx.shadowColor = '#00e878';
+            ctx.shadowBlur = 10;
+          }
+          
+          ctx.fill();
+          ctx.shadowBlur = 0;
+          
+          // Draw trail
+          ctx.beginPath();
+          const trailLen = 0.15; // 15% of path length
+          let trailProgress = p.progress - trailLen;
+          if(trailProgress < 0) trailProgress = 0;
+          
+          const tSegment = Math.floor(trailProgress * totalSegments);
+          const tSegProg = (trailProgress * totalSegments) - tSegment;
+          
+          if(tSegment < totalSegments) {
+            const tp1 = p.path[tSegment];
+            const tp2 = p.path[tSegment + 1];
+            const tx = tp1[0] + (tp2[0] - tp1[0]) * tSegProg;
+            const tz = tp1[1] + (tp2[1] - tp1[1]) * tSegProg;
+            const tPt = iso(tx, 0, tz);
+            
+            ctx.moveTo(pt.x, pt.y);
+            ctx.lineTo(tPt.x, tPt.y);
+            ctx.strokeStyle = p.type === 'energy' ? 'rgba(245, 197, 24, 0.5)' : 'rgba(0, 232, 120, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+          }
+        }
       });
 
-      drawPlatform();
+      // 4. Draw Pods
+      pods.forEach(pod => {
+        // Simple hover/bounce effect
+        const bounce = Math.sin(t * 2 + pod.seed) * 2;
+        drawPod(pod.x, pod.z, pod.h + bounce, pod.seed, pod.type, t);
+      });
 
-      // Solar panels
-      drawSolarPanel(-110, -55, 0.8, t);
-      drawSolarPanel(-35, -75, 0.85, t);
-      drawSolarPanel(-100, 30, 0.75, t);
-      drawSolarPanel(-25, 15, 0.8, t);
-
-      // Wind turbines
-      drawTurbine(-150, -95, 0.7, t, 1.1);
-      drawTurbine(-160, 65, 0.65, t, 0.85);
-      drawTurbine(15, 75, 0.55, t, 1.4);
-
-      // Transmission towers
-      drawTower(35, -70, 0.85);
-      drawTower(95, -35, 0.8);
-
-      // Battery storage
-      drawBattery(150, 45, 0.8, t);
-
-      // Power lines + energy packets
-      drawPowerLines(t);
-
-      // Smooth radial vignette
-      const vg = ctx.createRadialGradient(w / 2, h / 2, h * 0.22, w / 2, h / 2, h * 0.72);
-      vg.addColorStop(0, 'rgba(6,7,10,0)');
-      vg.addColorStop(0.7, 'rgba(6,7,10,0.45)');
-      vg.addColorStop(1, 'rgba(6,7,10,0.95)');
-      ctx.fillStyle = vg;
+      // 5. Draw overlay gradients to fade out edges
+      const grad = ctx.createRadialGradient(w/2, h/2, h*0.2, w/2, h/2, h*0.6);
+      grad.addColorStop(0, 'rgba(6, 7, 10, 0)');
+      grad.addColorStop(1, 'rgba(6, 7, 10, 1)');
+      ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      raf = requestAnimationFrame(draw);
+      ctx.restore();
+      raf = requestAnimationFrame(render);
     };
 
-    raf = requestAnimationFrame(draw);
-    return () => { dead = true; cancelAnimationFrame(raf); removeEventListener('resize', resize); };
+    raf = requestAnimationFrame(render);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+    };
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-85">
-      <canvas ref={canvasRef} className="w-full h-full" />
+    <div ref={containerRef} className="w-full h-full relative">
+      <canvas
+        ref={canvasRef}
+        className="block w-full h-full"
+        style={{ filter: 'drop-shadow(0 0 30px rgba(0,0,0,0.5))' }}
+      />
     </div>
   );
 };

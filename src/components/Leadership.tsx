@@ -16,6 +16,7 @@ import { CTASection } from './Footer';
 const Leadership = () => {
   const [selectedLeader, setSelectedLeader] = useState(null);
   const [expandedBoardMember, setExpandedBoardMember] = useState(null);
+  const [expandedCommittee, setExpandedCommittee] = useState(null);
 
   const executives = [
     { 
@@ -122,7 +123,7 @@ const Leadership = () => {
   return (
     <div className="bg-black min-h-screen text-white selection:bg-brand-yellow selection:text-black">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex flex-col items-center pt-48 pb-20 px-6 overflow-hidden">
+      <section className="relative min-h-[70vh] flex flex-col items-center pt-32 pb-12 px-6 overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-[0.15]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(245,197,24,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(245,197,24,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
         </div>
@@ -157,7 +158,7 @@ const Leadership = () => {
       </section>
 
       {/* Executive Team Grid */}
-      <section className="py-32 bg-black relative border-t border-white/5">
+      <section className="py-16 bg-black relative border-t border-white/5">
         <div className="container mx-auto px-6 max-w-[1400px]">
           <div className="mb-24">
             <div className="text-[10px] font-semibold uppercase tracking-[0.5em] text-brand-yellow mb-6">Executive Council</div>
@@ -202,7 +203,7 @@ const Leadership = () => {
       </section>
 
       {/* Board of Directors Section */}
-      <section className="py-32 bg-[#050608] text-white relative overflow-hidden border-t border-white/5">
+      <section className="py-16 bg-[#050608] text-white relative overflow-hidden border-t border-white/5">
         {/* Soft Ambient Technical Background Glows */}
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-yellow/[0.02] blur-[120px] pointer-events-none" />
 
@@ -365,6 +366,149 @@ const Leadership = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Committees Section */}
+      <section className="py-16 bg-[#050608] text-white relative border-t border-white/5 overflow-hidden">
+        {/* Soft Ambient Technical Background Glows */}
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-yellow/[0.02] blur-[120px] pointer-events-none" />
+
+        <div className="container mx-auto px-6 max-w-[1400px] relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            
+            {/* Title & Info Pane */}
+            <div className="lg:col-span-5 space-y-8 order-1">
+              <div>
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <div className="w-1.5 h-1.5 bg-brand-yellow rounded-full" />
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.4em] text-white/50">Corporate Governance</span>
+                </div>
+                <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[0.95] tracking-tighter uppercase text-white">
+                  BOARD <br /><span className="text-white/40">COMMITTEES</span>
+                </h2>
+              </div>
+              
+              <div className="space-y-6">
+                <p className="text-white/60 text-lg font-medium leading-relaxed max-w-md">
+                  Dedicated oversight ensuring financial integrity, strategic alignment, and rigorous compliance across all operations.
+                </p>
+                <div className="h-0.5 w-16 bg-brand-yellow/30" />
+                <div className="text-[10px] font-semibold text-white/30 uppercase tracking-[0.25em]">
+                  Select a committee to view its mandate
+                </div>
+              </div>
+            </div>
+
+            {/* Accordion Pane */}
+            <div className="lg:col-span-7 space-y-4 order-2">
+              {[
+                {
+                  title: "Audit Committee",
+                  desc: "Responsible for overseeing the company's financial reporting process, internal controls, and compliance with legal and regulatory requirements.",
+                  chair: "Gerard Rotonda",
+                  members: ["Adam S. Rossman", "Ajay Gupta"]
+                },
+                {
+                  title: "Compensation Committee",
+                  desc: "Responsible for overseeing executive compensation and ensuring alignment with long-term shareholder value.",
+                  chair: "Adam S. Rossman",
+                  members: ["Gerard Rotonda"]
+                },
+                {
+                  title: "Governance & Nomination",
+                  desc: "Responsible for overseeing the company's corporate governance practices and identifying qualified individuals to become board members.",
+                  chair: "Adam S. Rossman",
+                  members: ["Alec Amar", "Ajay Gupta"]
+                },
+                {
+                  title: "Disclosure Committee",
+                  desc: "Responsible for ensuring that the company's public disclosures are accurate, complete, and timely.",
+                  chair: "Michel Amar",
+                  members: ["Gerard Rotonda", "Adam S. Rossman"]
+                }
+              ].map((committee, i) => {
+                const isExpanded = expandedCommittee === i;
+                return (
+                  <div 
+                    key={i} 
+                    onClick={() => setExpandedCommittee(isExpanded ? null : i)}
+                    className={`group border transition-all duration-500 p-6 rounded-3xl cursor-pointer flex flex-col items-start gap-4 ${
+                      isExpanded 
+                        ? 'border-brand-yellow/40 bg-white/[0.03] shadow-[0_12px_40px_rgba(245,197,24,0.05)]' 
+                        : 'border-white/5 bg-white/[0.01] hover:border-white/20 hover:bg-white/[0.02]'
+                    }`}
+                  >
+                    {/* Header Row */}
+                    <div className="flex items-center gap-6 w-full">
+                      <div className={`w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center font-mono font-semibold text-lg flex-shrink-0 transition-all duration-500 border ${
+                        isExpanded ? 'bg-brand-yellow text-black border-brand-yellow/40 ring-4 ring-brand-yellow/10' : 'bg-white/5 text-white/40 border-white/10 group-hover:border-white/20 group-hover:text-white'
+                      }`}>
+                        0{i + 1}
+                      </div>
+                      <div className="flex-1">
+                        <h4 className={`text-xl md:text-2xl font-semibold uppercase tracking-tighter transition-colors ${
+                          isExpanded ? 'text-brand-yellow' : 'text-white group-hover:text-brand-yellow'
+                        }`}>{committee.title}</h4>
+                      </div>
+                      
+                      {/* Interactive Chevron Indicators */}
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-500 ${
+                        isExpanded 
+                          ? 'border-brand-yellow/40 bg-brand-yellow/10 text-brand-yellow rotate-90' 
+                          : 'border-white/10 text-white/40 group-hover:border-white/20 group-hover:text-white'
+                      }`}>
+                        <ChevronRight size={18} />
+                      </div>
+                    </div>
+
+                    {/* Expandable Description and Members Section */}
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          className="overflow-hidden w-full"
+                        >
+                          <div className="pt-6 mt-6 border-t border-white/10 text-white/70">
+                            <p className="text-base font-medium leading-relaxed text-white/80 mb-8">
+                              {committee.desc}
+                            </p>
+                            
+                            <div className="bg-black/40 rounded-2xl p-6 border border-white/5">
+                              <div className="flex justify-between items-center pb-4 mb-4 border-b border-white/10">
+                                <div>
+                                  <div className="text-sm font-semibold uppercase tracking-wider text-white">{committee.chair}</div>
+                                  <div className="text-[10px] uppercase tracking-widest text-white/40 mt-1">Committee Chair</div>
+                                </div>
+                                <div className="w-8 h-8 rounded-full bg-brand-yellow/10 text-brand-yellow flex items-center justify-center border border-brand-yellow/20">
+                                  <span className="text-xs">✦</span>
+                                </div>
+                              </div>
+
+                              <div className="space-y-4">
+                                {committee.members.map((member, mIdx) => (
+                                  <div key={mIdx} className="flex justify-between items-center">
+                                    <div className="text-sm font-semibold uppercase tracking-wider text-white/70">{member}</div>
+                                    <div className="text-[10px] uppercase tracking-widest text-white/30">Member</div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
 
       <CTASection />
     </div>

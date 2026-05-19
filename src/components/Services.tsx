@@ -12,6 +12,7 @@ import IsometricEnergyGen from './IsometricEnergyGen';
 import NeoCloudVisual from './NeoCloudVisual';
 import GpuClusterDashboard from './GpuClusterDashboard';
 import ARMSVisual from './ARMSVisual';
+import ARMSModularVisual from './ARMSModularVisual';
 import NeuralCube3D from './NeuralCube3D';
 
 /* ─── Shared Components ─── */
@@ -353,8 +354,8 @@ export default function Services() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-32 items-center">
-            <div className="h-[600px] bg-black border border-white/10 overflow-hidden relative group order-last lg:order-first shadow-2xl">
-              <ARMSVisual />
+            <div className="h-[600px] overflow-hidden relative group order-last lg:order-first">
+              <ARMSModularVisual />
             </div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
