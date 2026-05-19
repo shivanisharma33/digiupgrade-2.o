@@ -260,10 +260,10 @@ const ARMS = () => {
           {/* Heading */}
           <h2 className="text-[clamp(2.2rem,5vw,4.5rem)] font-extrabold tracking-tight uppercase leading-[1.1] text-slate-900 mb-8 relative z-10 flex flex-col items-center">
             <span className="relative inline-block mb-2">
-              EVERYTHING YOU NEED.
+              TIER III RELIABILITY.
             </span>
             <span className="relative inline-block">
-              <span className="text-[#f5c518]">NOTHING</span> YOU DON'T.
+              <span className="text-[#f5c518]">MODULAR</span> SCALABILITY.
             </span>
           </h2>
 
