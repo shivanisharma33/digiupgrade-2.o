@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Footer, CTASection } from './Footer';
 import { Zap, Shield, BatteryCharging, Activity, Server, Cpu } from 'lucide-react';
-import NeuralCube3D from './NeuralCube3D';
+import EnergyHeroVisual from './EnergyHeroVisual';
 import EnergyFlowDiagram from './EnergyFlowDiagram';
 
 const Infrastructure = () => {
@@ -14,9 +14,9 @@ const Infrastructure = () => {
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
 
         {/* Background 3D Element */}
-        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none flex items-center justify-center">
-          <div className="w-full h-full max-w-6xl">
-            <NeuralCube3D />
+        <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+          <div className="w-full h-full max-w-7xl relative">
+            <EnergyHeroVisual />
           </div>
         </div>
 
@@ -50,7 +50,7 @@ const Infrastructure = () => {
 
             {/* Subheading */}
             <p className="text-white/60 text-base md:text-xl max-w-3xl mx-auto mb-14 leading-relaxed font-medium tracking-wide">
-              DigiPowerX controls the foundation of the AI revolution: <strong className="text-white">Raw Power</strong>. 
+              DigiPowerX controls the foundation of the AI revolution: <strong className="text-white">Raw Power</strong>.
               From owned generation assets to advanced grid interconnection, we provide the megawatt capacity required for next-generation computing.
             </p>
 
@@ -80,7 +80,7 @@ const Infrastructure = () => {
           >
             {/* Top highlight line */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#f5c518]/50 to-transparent opacity-50" />
-            
+
             {[
               { val: "60MW", label: "Existing Base Generation", desc: "North Texarkana Plant" },
               { val: "128MW", label: "Additional Capacity", desc: "Phase II Expansion" },
@@ -150,14 +150,14 @@ const Infrastructure = () => {
                       </p>
                     </div>
                   </div>
-                </div>   
+                </div>
               ))}
             </div>
 
             {/* Right Column: Existing Animated Visual */}
             <div className="lg:col-span-7 relative flex justify-center lg:justify-end">
               <div className="w-full max-w-[800px] bg-[#f8f9fa] rounded-3xl p-6 md:p-12 border border-black/[0.04] shadow-xl">
-                <EnergyFlowDiagram/>
+                <EnergyFlowDiagram />
               </div>
             </div>
 
@@ -167,7 +167,7 @@ const Infrastructure = () => {
 
       {/* Infrastructure Layers Section */}
       <section className="bg-[#06070a] py-24 px-6 border-y border-white/5 relative overflow-hidden">
-        
+
         {/* Abstract Background */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#f5c518]/5 rounded-full blur-[150px] pointer-events-none translate-x-1/3 -translate-y-1/3" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
@@ -206,17 +206,17 @@ const Infrastructure = () => {
             {/* Column 1: Generation */}
             <div className="bg-[#0a0b0f] p-10 md:p-12 rounded-3xl border border-white/5 hover:border-[#f5c518]/30 transition-all duration-500 group relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-[#f5c518] transition-all duration-500" />
-              
+
               <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-[#f5c518]/10 transition-all duration-500">
                 <Zap size={28} className="text-white group-hover:text-[#f5c518] transition-colors" />
               </div>
-              
+
               <div className="text-[#f5c518] text-[11px] font-bold uppercase tracking-[0.2em] mb-3">Layer 1</div>
               <h3 className="text-white text-2xl font-bold uppercase mb-4 tracking-tight">Generation Assets</h3>
               <p className="text-white/50 text-sm leading-relaxed mb-8 font-medium">
                 Owned power generation secures our foundation, shielding operations from market volatility and eliminating utility queue bottlenecks.
               </p>
-              
+
               <div className="space-y-4 pt-6 border-t border-white/5">
                 {[
                   "Natural gas & renewable integration",
@@ -235,17 +235,17 @@ const Infrastructure = () => {
             {/* Column 2: Substation */}
             <div className="bg-[#0a0b0f] p-10 md:p-12 rounded-3xl border border-white/5 hover:border-[#f5c518]/30 transition-all duration-500 group relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-[#f5c518] transition-all duration-500" />
-              
+
               <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-[#f5c518]/10 transition-all duration-500">
                 <Activity size={28} className="text-white group-hover:text-[#f5c518] transition-colors" />
               </div>
-              
+
               <div className="text-[#f5c518] text-[11px] font-bold uppercase tracking-[0.2em] mb-3">Layer 2</div>
               <h3 className="text-white text-2xl font-bold uppercase mb-4 tracking-tight">Transformation</h3>
               <p className="text-white/50 text-sm leading-relaxed mb-8 font-medium">
                 Strategic substation control provides the high-voltage gateway necessary for rapid, large-scale data center deployment.
               </p>
-              
+
               <div className="space-y-4 pt-6 border-t border-white/5">
                 {[
                   "Direct high-voltage grid interconnection",
@@ -264,17 +264,17 @@ const Infrastructure = () => {
             {/* Column 3: Compute */}
             <div className="bg-[#0a0b0f] p-10 md:p-12 rounded-3xl border border-white/5 hover:border-[#f5c518]/30 transition-all duration-500 group relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-[#f5c518] transition-all duration-500" />
-              
+
               <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-[#f5c518]/10 transition-all duration-500">
                 <Server size={28} className="text-white group-hover:text-[#f5c518] transition-colors" />
               </div>
-              
+
               <div className="text-[#f5c518] text-[11px] font-bold uppercase tracking-[0.2em] mb-3">Layer 3</div>
               <h3 className="text-white text-2xl font-bold uppercase mb-4 tracking-tight">Compute Delivery</h3>
               <p className="text-white/50 text-sm leading-relaxed mb-8 font-medium">
                 We convert raw energy into the highest-margin output: compute-ready capacity optimized for intensive AI workloads.
               </p>
-              
+
               <div className="space-y-4 pt-6 border-t border-white/5">
                 {[
                   "High-density rack power architecture",
@@ -309,18 +309,18 @@ const Infrastructure = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
             <div className="bg-[#111] text-white p-12 rounded-3xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#f5c518]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-              
+
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-12 rounded-full bg-[#f5c518]/10 flex items-center justify-center border border-[#f5c518]/20">
                   <Shield size={20} className="text-[#f5c518]" />
                 </div>
                 <h3 className="text-2xl font-bold uppercase tracking-tight">Strategic Independence</h3>
               </div>
-              
+
               <p className="text-white/70 text-lg leading-relaxed font-medium mb-8">
                 While competitors lease capacity and wait years in utility interconnection queues, our vertical integration strategy places us years ahead. We control the power source, dictating our own timelines.
               </p>
-              
+
               <div className="p-6 bg-white/5 border border-white/10 rounded-xl">
                 <div className="text-[#f5c518] font-bold text-3xl mb-1">0 Wait Time</div>
                 <div className="text-white/50 text-xs font-bold uppercase tracking-widest">For primary grid queue approvals</div>
@@ -329,18 +329,18 @@ const Infrastructure = () => {
 
             <div className="bg-[#f8f9fa] border border-black/5 p-12 rounded-3xl relative overflow-hidden group">
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
-              
+
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center border border-black/10">
                   <Activity size={20} className="text-black" />
                 </div>
                 <h3 className="text-2xl font-bold uppercase tracking-tight text-black">Margin Expansion</h3>
               </div>
-              
+
               <p className="text-black/70 text-lg leading-relaxed font-medium mb-8">
                 The shift from standard enterprise colocation to AI-centric infrastructure requires massive power density. By owning the generation, we capture the margin at every step of the energy-to-compute conversion.
               </p>
-              
+
               <div className="p-6 bg-white border border-black/5 rounded-xl shadow-sm">
                 <div className="text-black font-bold text-3xl mb-1">Highest Value</div>
                 <div className="text-black/50 text-xs font-bold uppercase tracking-widest">Yield per megawatt generated</div>

@@ -10,6 +10,7 @@ import {
 import HeroBg from './HeroBg';
 import IsometricEnergyGen from './IsometricEnergyGen';
 import NeoCloudVisual from './NeoCloudVisual';
+import GpuClusterDashboard from './GpuClusterDashboard';
 import ARMSVisual from './ARMSVisual';
 import NeuralCube3D from './NeuralCube3D';
 
@@ -346,8 +347,8 @@ export default function Services() {
                 NeoCloudz Platform
               </button>
             </motion.div>
-            <div className="h-[600px] bg-black border border-white/10 overflow-hidden relative group shadow-2xl">
-              <NeoCloudVisual />
+            <div className="bg-black border border-white/10 overflow-hidden relative group shadow-2xl rounded-lg">
+              <GpuClusterDashboard />
             </div>
           </div>
 

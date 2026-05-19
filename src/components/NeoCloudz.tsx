@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { CTASection } from './Footer';
 import NeuralCube3D from './NeuralCube3D';
+import GpuClusterDashboard from './GpuClusterDashboard';
 
 // =========================================================
 // LIVE CLUSTER TELEMETRY VISUAL
@@ -286,11 +287,9 @@ const NeoCloudz = () => {
 
           <div className="lg:w-1/2 w-full relative">
             <div className="absolute top-0 left-0 w-full h-full bg-[#00e878]/10 blur-[100px] rounded-full pointer-events-none" />
-            <div className="relative pl-6 pt-6">
-              <div className="absolute top-0 left-0 w-20 h-20 border-t border-l border-[#00e878]/30 pointer-events-none" />
-              <div className="absolute bottom-[-1.5rem] right-[-1.5rem] w-20 h-20 border-b border-r border-[#00e878]/30 pointer-events-none" />
-              <div className="absolute -top-12 right-0 text-[9px] font-mono font-medium text-[#00e878] tracking-[0.4em] uppercase">NeoCloudz Cluster — Live Node Telemetry</div>
-              <ClusterTelemetry />
+            <div className="relative">
+              <div className="absolute -top-8 right-0 text-[9px] font-mono font-medium text-[#00e878] tracking-[0.4em] uppercase">NeoCloudz Cluster — Live Node Telemetry</div>
+              <GpuClusterDashboard />
             </div>
           </div>
         </div>
